@@ -17,15 +17,11 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
-        <x-banner />
-
-        <div class="min-h-screen bg-gray-100">
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-
+    <body class="container">
+        <main>
+            @yield('content')
+        </main>
+        
         @stack('modals')
 
         @livewireScripts
