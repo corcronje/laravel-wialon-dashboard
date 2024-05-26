@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cb0fb52670e960b0d7260d1b2e12a99",
+    "content-hash": "1b086724a4a6a77130817967ec8bae6c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3457,6 +3457,42 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.12.3"
             },
             "time": "2024-04-02T15:57:53+00:00"
+        },
+        {
+            "name": "punksolid/laravel-wialon",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./packages/laravel-wialon",
+                "reference": "4cad3977756223eade8fe942d7e7f4dc957d185f"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Punksolid\\Wialon\\WialonServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Punksolid\\Wialon\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jose Palazuelos",
+                    "email": "punksolid@gmail.com"
+                }
+            ],
+            "description": "Composer laravel ready implementation for php-wialon",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "ralouphie/getallheaders",
@@ -8700,7 +8736,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
