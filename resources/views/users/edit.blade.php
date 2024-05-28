@@ -2,7 +2,7 @@
 
 @section('page-title')
 <div class="pb-3 mb-3 border-bottom">
-    <h1 class="m-0">Edit User</h1>
+    <h2 class="m-0">Edit User</h2>
 </div>
 @endsection
 

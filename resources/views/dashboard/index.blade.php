@@ -2,7 +2,7 @@
 
 @section('page-title')
     <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
-        <h1 class="m-0">Dashboard</h1>
+        <h2 class="m-0">Dashboard</h2>
         @can('create', \App\Models\Order::class)
             <a href="{{ route('orders.create') }}" class="btn btn-primary">New Order</a>
         @endcan

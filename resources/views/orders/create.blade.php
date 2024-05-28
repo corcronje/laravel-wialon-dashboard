@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@section('page-title')
+    <div class="pb-3 mb-3 border-bottom">
+        <h2 class="m-0">New Order</h2>
+    </div>
+@endsection
+
 @section('content')
-    <h2>New Order</h2>
-    <p>Use the form below to create a new order</p>
     <form action="{{ route('orders.store') }}" method="post">
         @csrf
         @include('orders.form')
