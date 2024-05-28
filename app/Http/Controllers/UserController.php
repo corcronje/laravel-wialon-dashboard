@@ -7,15 +7,16 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $request->authorize('viewAny', User::class);
+        Gate::authorize('viewAny', User::class);
 
         $users = User::all();
 
@@ -25,11 +26,11 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
-        $request->authorize('create', User::class);
+        Gate::authorize('create', User::class);
 
-        $roles = Role::all();
+        $roles = Role::all()->pluck('name', 'id');
 
         return view('users.create', compact('roles'));
     }
@@ -39,7 +40,12 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        User::create($request->validated());
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role_id' => $request->role_id
+        ]);
 
         return redirect()->route('users.index');
     }
@@ -47,9 +53,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user, Request $request)
+    public function show(User $user)
     {
-        $request->authorize('view', $user);
+        Gate::authorize('view', $user);
 
         return view('users.show', compact('user'));
     }
@@ -57,11 +63,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user, Request $request)
+    public function edit(User $user)
     {
-        $request->authorize('update', $user);
+        Gate::authorize('update', $user);
 
-        $roles = Role::all();
+        $roles = Role::all()->pluck('name', 'id');
 
         return view('users.edit', compact('user', 'roles'));
     }
@@ -71,7 +77,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role_id,
+            'password' => $request->password ? bcrypt($request->password) : $user->password
+        ]);
 
         return redirect()->route('users.index');
     }
@@ -79,9 +90,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user, Request $request)
+    public function destroy(User $user)
     {
-        $request->authorize('delete', $user);
+        Gate::authorize('delete', $user);
 
         $user->delete();
 

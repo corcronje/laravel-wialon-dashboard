@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDriverRequest;
+use App\Http\Requests\UpdateDriverRequest;
 use App\Models\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class DriverController extends Controller
 {
@@ -12,7 +15,11 @@ class DriverController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('viewAny', Driver::class);
+
+        $drivers = Driver::all();
+
+        return view('drivers.index', compact('drivers'));
     }
 
     /**
@@ -20,15 +27,19 @@ class DriverController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('create', Driver::class);
+
+        return view('drivers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDriverRequest $request)
     {
-        //
+        Driver::create($request->validated());
+
+        return redirect()->route('drivers.index');
     }
 
     /**
@@ -36,7 +47,9 @@ class DriverController extends Controller
      */
     public function show(Driver $driver)
     {
-        //
+        Gate::authorize('view', $driver);
+
+        return view('drivers.show', compact('driver'));
     }
 
     /**
@@ -44,15 +57,21 @@ class DriverController extends Controller
      */
     public function edit(Driver $driver)
     {
-        //
+        Gate::authorize('update', $driver);
+
+        return view('drivers.edit', compact('driver'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Driver $driver)
+    public function update(UpdateDriverRequest $request, Driver $driver)
     {
-        //
+        Gate::authorize('update', $driver);
+
+        $driver->update($request->validated());
+
+        return redirect()->route('drivers.index');
     }
 
     /**
@@ -60,6 +79,10 @@ class DriverController extends Controller
      */
     public function destroy(Driver $driver)
     {
-        //
+        Gate::authorize('delete', $driver);
+
+        $driver->delete();
+
+        return redirect()->route('drivers.index');
     }
 }

@@ -3,22 +3,23 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\BelongsToRole;
+use App\Traits\HasManyOrders;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    use HasProfilePhoto;
-    use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use BelongsToRole;
+    use HasManyOrders;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -63,16 +65,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function hasRole(string $role): bool
-    {
-        return true;
-        return $this->role === $role;
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
     }
 }

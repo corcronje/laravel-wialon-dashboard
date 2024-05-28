@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Driver;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Unit::class, 'unit_id');
             $table->foreignIdFor(User::class, 'user_id');
-            $table->string('driver');
+            $table->foreignIdFor(Driver::class, 'driver_id');
             $table->integer('fuel_allowed_litres');
             $table->integer('fuel_replenished_litres')->nullable();
             $table->integer('mileage_km');

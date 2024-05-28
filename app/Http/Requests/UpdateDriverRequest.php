@@ -11,6 +11,10 @@ class UpdateDriverRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if ($this->user()->can('update', $this->driver)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -22,7 +26,8 @@ class UpdateDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'employee_number' => ['required', 'string', 'min:3', 'max:10', 'unique:drivers,employee_number,' . $this->driver->id],
+            'name' => ['required', 'string', 'min:3', 'max:50'],
         ];
     }
 }

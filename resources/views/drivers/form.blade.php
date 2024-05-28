@@ -1,2 +1,2 @@
-<x-select-input name="unit_id" title="Unit / Vehicle" :value="old('unit_id')" :options="$units" placeholder="Select a unit" />
-<x-text-input name="driver" title="Driver name" :value="old('driver')" placeholder="Driver name" />
+<x-text-input name="employee_number" title="Employee Number" :value="old('employee_number', $driver?->employee_number ?? '')" placeholder="Employee number" />
+<x-text-input name="name" title="Name" :value="old('name', $driver?->name ?? '')" placeholder="Name" />

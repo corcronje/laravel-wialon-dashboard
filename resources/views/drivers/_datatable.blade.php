@@ -1,21 +1,19 @@
 <table id="datatable" class="table">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Unit</th>
-            <th>Litres</th>
+            <th>Employee Nr</th>
+            <th>Name</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($orders as $order)
+        @foreach ($drivers as $driver)
             <tr>
-                <td>{{ $order->created_at->toDateTimeString() }}</td>
-                <td>{{ $order->unit->wialon_nm }}</td>
-                <td>{{ number_format($order->fuel_allowed_litres) }}</td>
+                <td>{{ $driver->employee_number }}</td>
+                <td>{{ $driver->name }}</td>
                 <td>
-                    @can('view', $order)
-                        <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-link">View</a>
+                    @can('view', $driver)
+                        <a href="{{ route('drivers.show', $driver) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
                 </td>
             </tr>

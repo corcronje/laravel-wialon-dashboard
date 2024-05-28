@@ -63,6 +63,8 @@
                         <ul class="nav flex-column align-items-end">
                             <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a></li>
                             <li class="nav-item"><a href="{{ route('orders.index') }}" class="nav-link">Orders</a></li>
+                            <li class="nav-item"><a href="{{ route('drivers.index') }}" class="nav-link">Drivers</a></li>
+                            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">Users</a></li>
                             <li class="nav-item"><a href="{{ route('units.index') }}" class="nav-link">Units</a></li>
                         </ul>
                     </nav>

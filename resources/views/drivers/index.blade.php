@@ -2,15 +2,15 @@
 
 @section('page-title')
 <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
-    <h1 class="m-0">Orders</h1>
-    @can('create', \App\Models\Order::class)
-        <a href="{{ route('orders.create') }}" class="btn btn-primary">New Order</a>
+    <h1 class="m-0">Drivers</h1>
+    @can('create', \App\Models\Driver::class)
+        <a href="{{ route('drivers.create') }}" class="btn btn-primary">Add Driver</a>
     @endcan
 </div>
 @endsection
 
 @section('content')
-    @include('orders._datatable')
+    @include('drivers._datatable')
 @endsection
 
 
