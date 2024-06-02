@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 @section('content')
     <h2>Login</h2>
     <p>Enter your email and password below to login</p>

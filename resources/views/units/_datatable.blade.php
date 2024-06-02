@@ -1,23 +1,27 @@
 <table id="datatable" class="table">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
-            <th>Kilometers</th>
-            <th>Replenishable Litres</th>
+            <th>Distance Km</th>
+            <th>Consumption Litres</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($units as $unit)
             <tr>
-                <td>{{ $unit->wialon_id }}</td>
                 <td>{{ $unit->wialon_nm }}</td>
-                <td>{{ number_format($unit->mileage_km) }}</td>
+                <td>{{ number_format($unit->distance_travelled_km) }}</td>
                 <td>{{ number_format($unit->fuel_allowed_litres) }}</td>
                 <td>
                     @can('view', $unit)
                         <a href="{{ route('units.show', $unit) }}" class="btn btn-sm btn-link">View</a>
+                    @endcan
+                    @can('create', App\Models\Order::class)
+                        <a href="{{ route('orders.create', [
+                            'unit_id' => $unit->id,
+                        ]) }}"
+                            class="btn btn-sm btn-link">New Order</a>
                     @endcan
                 </td>
             </tr>

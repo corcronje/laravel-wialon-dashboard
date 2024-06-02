@@ -14,6 +14,7 @@ class UnitObserver
         if(!$unit->fuel_replenished_litres)
         {
             $unit->fuel_replenished_litres = $unit->fuel_consumed_litres;
+            $unit->mileage_replenished_km = $unit->mileage_km;
             $unit->save();
         }
     }

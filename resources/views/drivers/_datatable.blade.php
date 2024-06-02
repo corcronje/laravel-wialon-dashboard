@@ -15,6 +15,12 @@
                     @can('view', $driver)
                         <a href="{{ route('drivers.show', $driver) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
+                    @can('create', App\Models\Order::class)
+                        <a href="{{ route('orders.create', [
+                            'driver_id' => $driver->id,
+                        ]) }}"
+                            class="btn btn-sm btn-link">New Order</a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

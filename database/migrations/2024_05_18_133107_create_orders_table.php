@@ -16,12 +16,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_number')->nullable();
             $table->foreignIdFor(Unit::class, 'unit_id');
             $table->foreignIdFor(User::class, 'user_id');
             $table->foreignIdFor(Driver::class, 'driver_id');
+            $table->integer('fuel_consumed_litres');
             $table->integer('fuel_allowed_litres');
             $table->integer('fuel_replenished_litres')->nullable();
             $table->integer('mileage_km');
+            $table->integer('distance_travelled_km')->nullable();
             $table->string('status')->default('pending');
             $table->softDeletes();
             $table->timestamps();

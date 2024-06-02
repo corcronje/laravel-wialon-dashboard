@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,8 @@ Route::middleware([
     Route::resource('users', UserController::class);
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);
     Route::resource('orders', OrderController::class);
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('orders/{order}/close', [OrderController::class, 'close'])->name('orders.close');
     Route::post('orders/{order}/close', [OrderController::class, 'fulfill'])->name('orders.fulfill');
 });

@@ -11,7 +11,8 @@
         @csrf
         @method('put')
         @include('drivers.form')
+        <hr>
         <button type="submit" class="btn btn-primary">Update Driver</button>
-        <a href="{{ route('drivers.index') }}" class="btn btn-link">Cancel</a>
+        <a href="{{ route('drivers.show', $driver) }}" class="btn btn-link">Back</a>
     </form>
 @endsection

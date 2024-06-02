@@ -10,7 +10,8 @@
     <form action="{{ route('orders.store') }}" method="post">
         @csrf
         @include('orders.form')
+        <hr>
         <button type="submit" class="btn btn-primary">Create Order</button>
-        <a href="{{ route('orders.index') }}" class="btn btn-link">Cancel</a>
+        <a href="{{ route('orders.index') }}" class="btn btn-link">Back</a>
     </form>
 @endsection

@@ -11,5 +11,10 @@ class Driver extends Model
 {
     use HasFactory, SoftDeletes, HasManyOrders;
 
-    protected $fillable = ['employee_number', 'name'];  
+    protected $fillable = ['employee_number', 'name'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

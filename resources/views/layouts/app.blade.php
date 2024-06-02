@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">{{ env('APP_NAME') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -59,6 +59,7 @@
                         <li class="nav-item"><a href="{{ route('drivers.index') }}" class="nav-link">Drivers</a></li>
                         <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">Users</a></li>
                         <li class="nav-item"><a href="{{ route('units.index') }}" class="nav-link">Units</a></li>
+                        <li class="nav-item"><a href="{{ route('reports.index') }}" class="nav-link">Reports</a></li>
                     </ul>
                 </nav>
             </aside>
@@ -74,6 +75,10 @@
             </main>
         </div>
     </div>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
 
     @stack('modals')
     @vite(['resources/js/app.js'])

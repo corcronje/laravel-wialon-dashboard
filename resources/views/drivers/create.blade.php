@@ -10,7 +10,8 @@
     <form action="{{ route('drivers.store') }}" method="post">
         @csrf
         @include('drivers.form')
+        <hr>
         <button type="submit" class="btn btn-primary">Add Driver</button>
-        <a href="{{ route('drivers.index') }}" class="btn btn-link">Cancel</a>
+        <a href="{{ route('drivers.index') }}" class="btn btn-link">Back</a>
     </form>
 @endsection

@@ -3,7 +3,10 @@
         <tr>
             <th>Date</th>
             <th>Unit</th>
+            <th>Driver</th>
+            <th>Kilometers</th>
             <th>Litres</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -12,15 +15,36 @@
             <tr>
                 <td>{{ $order->created_at->toDateTimeString() }}</td>
                 <td>{{ $order->unit->wialon_nm }}</td>
-                <td>{{ number_format($order->fuel_allowed_litres) }}</td>
+                <td>{{ $order->driver->name }}</td>
+                <td>{{ number_format($order->distance_travelled_km) }}</td>
+                <td>{{ number_format($order->fuel_replenished_litres) }}</td>
+                @if ($order->status === 'pending')
+                    <td><span class="badge bg-warning">Pending</span></td>
+                @else
+                    <td><span class="badge bg-success">Closed</span></td>
+                @endif
                 <td>
                     @can('view', $order)
                         <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-link">View</a>
+                    @endcan
+                    @can('close', $order)
+                        <a href="{{ route('orders.close', $order) }}" class="btn btn-sm btn-link">Close</a>
                     @endcan
                 </td>
             </tr>
         @endforeach
     </tbody>
+    @if ($showTotals ?? false)
+        <tfoot>
+            <tr>
+                <th colspan="3">Totals</th>
+                <th>{{ number_format($orders->sum('distance_travelled_km')) }}</th>
+                <th>{{ number_format($orders->sum('fuel_replenished_litres')) }}</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    @endif
 </table>
 
 @push('styles')

@@ -14,6 +14,7 @@
         <x-email-input name="email" title="Email" :value="old('email', $user->email ?? '')" placeholder="Email" />
         <x-password-input name="password" title="Password" placeholder="Password" />
         <x-password-input name="password_confirmation" title="Confirm Password" :value="old('name', $user->name ?? '')" placeholder="Confirm password" />
+        <hr>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 @endsection

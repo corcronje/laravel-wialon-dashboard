@@ -61,6 +61,10 @@ class DriverPolicy
      */
     public function delete(User $user, Driver $driver): Response
     {
+        if($driver->orders->count() > 0) {
+            return Response::deny('You are not authorized to delete this driver because it has orders.');
+        }
+
         if($user->hasRole('admin')) {
             return Response::allow();
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Order;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderRequest extends FormRequest
@@ -11,7 +12,11 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if($this->user()->can('create', Order::class)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -22,8 +27,8 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'unit_id' => 'required',
-            'driver' => 'required',
+            'unit_id' => 'required|exists:units,id',
+            'driver_id' => 'required|exists:drivers,id',
         ];
     }
 }

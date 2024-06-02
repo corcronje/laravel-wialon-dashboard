@@ -39,7 +39,7 @@ class DriverController extends Controller
     {
         Driver::create($request->validated());
 
-        return redirect()->route('drivers.index');
+        return redirect()->route('drivers.index')->with('success', 'Driver created successfully!');
     }
 
     /**
@@ -71,7 +71,7 @@ class DriverController extends Controller
 
         $driver->update($request->validated());
 
-        return redirect()->route('drivers.index');
+        return redirect()->route('drivers.index')->with('success', 'Driver updated successfully!');
     }
 
     /**
@@ -83,6 +83,20 @@ class DriverController extends Controller
 
         $driver->delete();
 
-        return redirect()->route('drivers.index');
+        return redirect()->route('drivers.index')->with('success', 'Driver deleted successfully!');
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore($id)
+    {
+        $driver = Driver::withTrashed()->findOrFail($id);
+
+        Gate::authorize('restore', $driver);
+
+        $driver->restore();
+
+        return redirect()->route('drivers.index')->with('success', 'Driver restored successfully!');
     }
 }

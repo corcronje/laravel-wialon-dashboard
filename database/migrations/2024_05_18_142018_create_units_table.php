@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('wialon_id');
             $table->string('wialon_nm');
+            $table->string('wialon_mileage_sensor_id');
+            $table->float('wialon_mileage_sensor_calibration_factor');
+            $table->string('wialon_fuel_consumption_sensor_id');
+            $table->float('wialon_fuel_consumption_sensor_calibration_factor');
             $table->integer('fuel_consumed_litres');
             $table->integer('fuel_replenished_litres')->nullable();
             $table->integer('mileage_km');
+            $table->integer('mileage_replenished_km')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

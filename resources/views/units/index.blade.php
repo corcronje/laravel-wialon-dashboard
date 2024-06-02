@@ -10,5 +10,5 @@
 @endsection
 
 @section('content')
-    @include('units._datatable', ['config' => ['order' => [[1, 'asc']]]])
+    @include('units._datatable', ['config' => ['order' => [[1, 'des']]]])
 @endsection

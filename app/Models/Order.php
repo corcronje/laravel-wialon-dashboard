@@ -12,15 +12,40 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes, BelongsToUser, BelongsToDriver;
 
-    protected $fillable = ['unit_id', 'user_id', 'driver_id', 'fuel_allowed_litres', 'fuel_replenished_litres', 'mileage_km', 'status'];
+    protected $fillable = [
+        'unit_id',
+        'user_id',
+        'driver_id',
+        'fuel_consumed_litres',
+        'fuel_allowed_litres',
+        'fuel_replenished_litres',
+        'mileage_km',
+        'distance_travelled_km',
+        'status'
+    ];
 
     public function unit()
     {
         return $this->belongsTo(Unit::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class);
+    }
+
     public function scopePending($query)
     {
         return $query->where('status', 'pending');
+    }
+
+    public function scopeClosed($query)
+    {
+        return $query->where('status', 'closed');
     }
 }

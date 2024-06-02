@@ -1,0 +1,20 @@
+@extends('layouts.app')
+
+@section('page-title')
+    <div class="pb-3 mb-3 border-bottom">
+        <h2 class="m-0">Reports</h2>
+    </div>
+@endsection
+
+@section('content')
+    <form action="{{ route('reports.store') }}" method="post">
+        @csrf
+        @include('reports.form')
+        <hr>
+        <button type="submit" class="btn btn-primary">Generate</button>
+    </form>
+    @if ($orders ?? false)
+        <hr>
+        @include('orders._datatable', ['showTotals' => true])
+    @endif
+@endsection

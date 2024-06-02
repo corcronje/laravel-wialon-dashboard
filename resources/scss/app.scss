@@ -1,5 +1,12 @@
 @import 'bootstrap/scss/bootstrap';
 
+.bg-auth {
+    background-color: #f5f5f5;
+    background-image: url('/images/bg-auth.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 [x-cloak] {
     display: none;
 }
