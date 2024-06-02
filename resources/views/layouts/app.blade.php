@@ -17,12 +17,32 @@
 
     @stack('styles')
 
+    <style>
+        body {
+            height: 100vh;
+            background-color: #eaeaea;
+        }
+        .bg-navbar {
+            color: #efefef !important;
+            background: rgb(23, 56, 106);
+            background: linear-gradient(45deg, rgba(23, 56, 106, 1) 0%, rgba(29, 173, 254, 1) 100%);
+        }
+
+        .bg-navbar .navbar-brand {
+            color: #efefef !important;
+        }
+
+        .bg-navbar .dropdown-toggle {
+            color: #efefef;
+        }
+    </style>
+
     <!-- Styles -->
     @livewireStyles
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg bg-navbar fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">{{ env('APP_NAME') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -49,9 +69,9 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
-        <div class="row">
-            <aside class="col-auto">
+    <div class="container h-100">
+        <div class="row h-100">
+            <aside class="col-auto" style="padding-top: 5rem">
                 <nav>
                     <ul class="nav flex-column align-items-end">
                         <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a></li>
@@ -63,7 +83,7 @@
                     </ul>
                 </nav>
             </aside>
-            <main class="col">
+            <main class="col bg-white h-100" style="padding-top: 5rem">
                 @if (session()->has('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif

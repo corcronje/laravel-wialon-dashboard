@@ -17,16 +17,40 @@
 
     @stack('styles')
 
+    <style>
+        body {
+            background-color: #eaeaea;
+        }
+        .bg-navbar {
+            color: #efefef !important;
+            background: rgb(23, 56, 106);
+            background: linear-gradient(45deg, rgba(23, 56, 106, 1) 0%, rgba(29, 173, 254, 1) 100%);
+        }
+
+        .bg-navbar .navbar-brand {
+            color: #efefef !important;
+        }
+
+        .bg-navbar .dropdown-toggle {
+            color: #efefef;
+        }
+    </style>
+
     <!-- Styles -->
     @livewireStyles
 </head>
 
 <body>
-    <div class="row justify-content-center align-items-center vh-100 bg-auth">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    @yield('content')
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100 bg-auth">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6" style="background-image: url('{{ asset('images/bg-auth.jpg') }}'); background-size: cover; background-position: center" ></div>
+                        <div class="col-md-6 p-4">
+                            @yield('content')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
