@@ -8,6 +8,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 
-Artisan::command('import:units', function () {
+/* Artisan::command('import:units', function () {
     $this->comment('Units imported successfully');
-})->purpose('Sync Wialon unit messages')->everyFiveMinutes();
+})->purpose('Sync Wialon unit messages')->everyFiveMinutes(); */
