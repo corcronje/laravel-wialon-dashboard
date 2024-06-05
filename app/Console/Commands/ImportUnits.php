@@ -74,6 +74,8 @@ class ImportUnits extends Command
                     'mileage_km' => intval($wialonUnit->lmsg->p->$mileageSensor * $mileageCalibrationFactor),
                 ]
             );
+
+            $this->info("Unit {$wialonUnit->nm} imported.");
         }
     }
 }
