@@ -37,6 +37,7 @@ class ImportUnits extends Command
         $wialonUnits = WialonUnit::all();
 
         foreach ($wialonUnits as $wialonUnit) {
+            $this->info("Importing unit {$wialonUnit->nm}...");
             if (!($wialonUnit?->lmsg?->p?->$fuelSensor ?? false)) {
                 continue;
             }
