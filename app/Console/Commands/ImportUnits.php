@@ -36,8 +36,10 @@ class ImportUnits extends Command
 
         $wialonUnits = WialonUnit::all();
 
+        // start the progress bar
+        $bar = $this->output->createProgressBar(count($wialonUnits));
+
         foreach ($wialonUnits as $wialonUnit) {
-            $this->info("Importing unit {$wialonUnit->nm}...");
             if (!($wialonUnit?->lmsg?->p?->$fuelSensor ?? false)) {
                 continue;
             }
@@ -76,7 +78,9 @@ class ImportUnits extends Command
                 ]
             );
 
-            $this->info("Unit {$wialonUnit->nm} imported.");
+            $bar->advance();
         }
+
+        $bar->finish();
     }
 }
