@@ -7,14 +7,36 @@
 @endsection
 
 @section('content')
-    <x-details :items="[
-        'Date' => $order->created_at->toDateTimeString(),
-        'Unit' => $order->unit->wialon_nm,
-        'Driver' => $order->driver->name,
-        'Fuel Allowed' => number_format($order->fuel_allowed_litres) . ' Litres',
-        'Fuel Replenished' => number_format($order->fuel_replenished_litres) . ' Litres',
-        'Distance Travelled' => number_format($order->distance_travelled_km) . ' Km',
-        'Status' => $order->status]" />
+    <div class="row">
+        <div class="col-md-6">
+            <h5 class="border-bottom pb-3 mb-3">Order</h5>
+            <x-details :items="[
+                'Date' => $order->created_at->toDateTimeString(),
+                'Unit' => $order->unit->wialon_nm,
+                'Driver' => $order->driver->name,
+                'Fuel Allowed' => number_format($order->fuel_allowed_litres) . ' Litres',
+                'Fuel Replenished' => number_format($order->fuel_replenished_litres) . ' Litres',
+                'Distance Travelled' => number_format($order->distance_travelled_km) . ' Km',
+                'Status' => $order->status,
+            ]" />
+        </div>
+        <div class="col-md-6">
+            <h5 class="border-bottom pb-3 mb-3">Previous Order</h5>
+            @if ($previousOrder)
+                <x-details :items="[
+                    'Date' => $previousOrder->created_at->toDateTimeString(),
+                    'Unit' => $previousOrder->unit->wialon_nm,
+                    'Driver' => $previousOrder->driver->name,
+                    'Fuel Allowed' => number_format($previousOrder->fuel_allowed_litres) . ' Litres',
+                    'Fuel Replenished' => number_format($previousOrder->fuel_replenished_litres) . ' Litres',
+                    'Distance Travelled' => number_format($previousOrder->distance_travelled_km) . ' Km',
+                    'Status' => $previousOrder->status,
+                ]" />
+            @else
+                <span>No previous order</span>
+            @endif
+        </div>
+    </div>
     <hr>
     <div>
         @can('update', $order)
@@ -39,7 +61,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="delete-order-form" action="{{ route('orders.destroy', $order) }}" method="post" class="d-inline">
+                    <form id="delete-order-form" action="{{ route('orders.destroy', $order) }}" method="post"
+                        class="d-inline">
                         @csrf
                         @method('delete')
                         <span>Are you sure you want to delete this order?</span>

@@ -70,7 +70,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        $previousOrder = Order::where('unit_id', $order->unit_id)->where('id', '!=', $order->id)->latest()->first();
+
+        return view('orders.show', compact('order', 'previousOrder'));
     }
 
     /**
