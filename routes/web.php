@@ -5,6 +5,7 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ResetUnitController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::resource('units', UnitController::class)->only(['index', 'show']);
+    Route::put('units/{unit}/reset', ResetUnitController::class)->name('units.reset');
     Route::resource('drivers', DriverController::class);
     Route::resource('users', UserController::class);
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);
