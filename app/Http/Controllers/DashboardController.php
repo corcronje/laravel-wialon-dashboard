@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,6 +15,8 @@ class DashboardController extends Controller
     {
         $orders = Order::pending()->latest()->take(5)->get();
 
-        return view('dashboard.index', compact('orders'));
+        $trips = Trip::pending()->latest()->take(5)->get();
+
+        return view('dashboard.index', compact('orders', 'trips'));
     }
 }

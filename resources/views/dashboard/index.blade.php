@@ -10,7 +10,18 @@
 @endsection
 
 @section('content')
+    <h4>Recent Orders</h4>
     @include('orders._datatable', [
+        'config' => [
+            'order' => [0, 'desc'],
+            'searching' => false,
+            'paging' => false,
+            'info' => false,
+            'ordering' => false,
+        ],
+    ])
+    <h4 class="mt-5">Recent Trips</h4>
+    @include('trips._datatable', [
         'config' => [
             'order' => [0, 'desc'],
             'searching' => false,

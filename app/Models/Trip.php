@@ -37,6 +37,11 @@ class Trip extends Model
         return $this->belongsTo(Unit::class);
     }
 
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
+
     public function scopeClosed($query)
     {
         return $query->where('status', 'closed');

@@ -1,4 +1,4 @@
-<table id="datatable" class="table">
+<table id="trips-datatable" class="table">
     <thead>
         <tr>
             <th>Date</th>
@@ -54,6 +54,6 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.js"></script>
     <script>
-        new DataTable('#datatable', @json($config ?? []));
+        new DataTable('#trips-datatable', @json($config ?? []));
     </script>
 @endpush
