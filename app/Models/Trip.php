@@ -37,6 +37,11 @@ class Trip extends Model
         return $this->belongsTo(Unit::class);
     }
 
+    public function scopeClosed($query)
+    {
+        return $query->where('status', 'closed');
+    }
+
     public function close()
     {
         $data = $this->data;
@@ -62,15 +67,35 @@ class Trip extends Model
 
     public function getDistanceTravelledKmAttribute(): int
     {
+        // if we don't have the start mileage, we can't calculate the distance
+        if(!isset($this->data['unit_data_start']['mileage_km'])) {
+            return 0;
+        }
+
+        // if the trip is pending, we use the latest unit mileage
+        if($this->status === 'pending') {
+            return $this->unit()->get()->first()->mileage_km - $this->data['unit_data_start']['mileage_km'];
+        }
+
         if(!isset($this->data['unit_data_start']['mileage_km']) || !isset($this->data['unit_data_end']['mileage_km'])) {
             return 0;
         }
 
-        return $this->data['unit_data_start']['mileage_km'] - $this->data['unit_data_end']['mileage_km'];
+        return $this->data['unit_data_end']['mileage_km'] - $this->data['unit_data_start']['mileage_km'];
     }
 
     public function getFuelConsumedLitresAttribute(): int
     {
+        // if we don't have the starting fuel consumption, we can't calculate the fuel consumed
+        if(!isset($this->data['unit_data_start']['fuel_consumed_litres'])) {
+            return 0;
+        }
+
+        // if the trip is pending, we use the latest unit fuel consumption
+        if($this->status === 'pending') {
+            return $this->unit()->get()->first()->fuel_consumed_litres - $this->data['unit_data_start']['fuel_consumed_litres'];
+        }
+
         if(!isset($this->data['unit_data_start']['fuel_consumed_litres']) || !isset($this->data['unit_data_end']['fuel_consumed_litres'])) {
             return 0;
         }

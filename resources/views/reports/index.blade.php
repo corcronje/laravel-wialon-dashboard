@@ -13,8 +13,8 @@
         <hr>
         <button type="submit" class="btn btn-primary">Generate</button>
     </form>
-    @if ($orders ?? false)
+    @if ($trips ?? false)
         <hr>
-        @include('orders._datatable', ['showTotals' => true])
+        @include('reports.report')
     @endif
 @endsection

@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use App\Models\Order;
+use App\Models\Trip;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ReportController extends Controller
 {
     public function index()
     {
-        $units = $this->units();
+        $trips = Trip::with('driver', 'unit')->get();
 
-        $drivers = $this->drivers();
+        $units = $trips->pluck('unit.wialon_nm', 'unit.id')->unique();
+
+        $drivers = $trips->pluck('driver.name', 'driver.id')->unique();
 
         $start_date = now()->startOf('month')->format('Y-m-d');
 
@@ -31,34 +35,36 @@ class ReportController extends Controller
             'driver_id' => 'nullable',
         ]);
 
-        $orders = Order::with('unit', 'driver')
-            ->when($request->unit_id != 0, function ($query) use ($request) {
+        $trips = Trip::with('driver', 'unit')->get();
+
+        $units = $trips->pluck('unit.wialon_nm', 'unit.id')->unique();
+
+        $drivers = $trips->pluck('driver.name', 'driver.id')->unique();
+
+        //dd($request->unit_id, $request->driver_id, $request->start_date, $request->end_date);
+
+        $startDate = Carbon::parse($request->start_date)->startOfDay();
+        $endDate = Carbon::parse($request->end_date)->endOfDay();
+
+        $trips = Trip::with('unit', 'driver')
+            ->when($request->unit_id ?? 0 != 0, function ($query) use ($request) {
                 return $query->where('unit_id', $request->unit_id);
             })
-            ->when($request->driver_id != 0, function ($query) use ($request) {
+            ->when($request->driver_id ?? 0 != 0, function ($query) use ($request) {
                 return $query->where('driver_id', $request->driver_id);
             })
-            ->whereBetween('created_at', [$request->start_date, $request->end_date])
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->closed()
             ->get();
 
         return view('reports.index', [
-            'units' => $this->units(),
-            'drivers' => $this->drivers(),
+            'units' => $units,
+            'drivers' => $drivers,
             'driver_id' => $request->driver_id,
             'unit_id' => $request->unit_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'orders' => $orders,
+            'trips' => $trips,
         ]);
-    }
-
-    private function drivers()
-    {
-        return Order::with('driver')->get()->pluck('driver.name', 'driver.id')->unique();
-    }
-
-    private function units()
-    {
-        return Order::with('unit')->get()->pluck('unit.wialon_nm', 'unit.id')->unique();
     }
 }

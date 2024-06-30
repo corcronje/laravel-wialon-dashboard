@@ -84,7 +84,7 @@
                     </ul>
                 </nav>
             </aside>
-            <main class="col bg-white h-100" style="padding-top: 5rem">
+            <main class="col bg-white" style="padding-top: 5rem">
                 @if (session()->has('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif

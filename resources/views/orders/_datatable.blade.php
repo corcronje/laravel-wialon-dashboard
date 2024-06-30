@@ -11,24 +11,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($orders as $order)
+        @foreach ($trips as $trip)
             <tr>
-                <td>{{ $order->created_at->toDateTimeString() }}</td>
-                <td>{{ $order->unit->wialon_nm }}</td>
-                <td>{{ $order->driver->name }}</td>
-                <td>{{ number_format($order->distance_travelled_km) }}</td>
-                <td>{{ number_format($order->fuel_replenished_litres) }}</td>
-                @if ($order->status === 'pending')
+                <td>{{ $trip->created_at->toDateTimeString() }}</td>
+                <td>{{ $trip->unit->wialon_nm }}</td>
+                <td>{{ $trip->driver->name }}</td>
+                <td>{{ number_format($trip->distance_travelled_km) }}</td>
+                <td>{{ number_format($trip->fuel_replenished_litres) }}</td>
+                @if ($trip->status === 'pending')
                     <td><span class="badge bg-warning">Pending</span></td>
                 @else
                     <td><span class="badge bg-success">Closed</span></td>
                 @endif
                 <td>
-                    @can('view', $order)
-                        <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-link">View</a>
-                    @endcan
-                    @can('close', $order)
-                        <a href="{{ route('orders.close', $order) }}" class="btn btn-sm btn-link">Close</a>
+                    @can('view', $trip)
+                        <a href="{{ route('trips.show', $trip) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
                 </td>
             </tr>
@@ -38,8 +35,8 @@
         <tfoot>
             <tr>
                 <th colspan="3">Totals</th>
-                <th>{{ number_format($orders->sum('distance_travelled_km')) }}</th>
-                <th>{{ number_format($orders->sum('fuel_replenished_litres')) }}</th>
+                <th>{{ number_format($trips->sum('distance_travelled_km')) }}</th>
+                <th>{{ number_format($trips->sum('fuel_replenished_litres')) }}</th>
                 <th></th>
                 <th></th>
             </tr>
