@@ -10,4 +10,18 @@ trait HasManyOrders
     {
         return $this->hasMany(Order::class);
     }
+
+    public function scopeWithPendingOrders($query)
+    {
+        return $query->whereHas('orders', function ($query) {
+            $query->where('status', 'pending');
+        });
+    }
+
+    public function scopeWithoutPendingOrders($query)
+    {
+        return $query->whereDoesntHave('orders', function ($query) {
+            $query->where('status', 'pending');
+        });
+    }
 }

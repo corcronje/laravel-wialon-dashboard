@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Observers\UnitObserver;
+use App\Traits\HasManyOrders;
+use App\Traits\HasManyTrips;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasManyOrders, HasManyTrips;
 
     protected $fillable = [
         'wialon_id',
@@ -25,12 +27,14 @@ class Unit extends Model
         'fuel_replenished_litres',
         'mileage_km',
         'mileage_replenished_km',
+        'data'
     ];
 
     protected $casts = [
         'fuel_consumed_litres' => 'integer',
         'fuel_replenished_litres' => 'integer',
         'mileage_km' => 'integer',
+        'data' => 'array'
     ];
 
     public function getFuelAllowedLitresAttribute(): int

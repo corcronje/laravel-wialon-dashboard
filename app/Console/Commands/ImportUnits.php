@@ -48,22 +48,6 @@ class ImportUnits extends Command
                 continue;
             }
 
-            /* $unit = Unit::where('wialon_id', $wialonUnit->id)->first();
-
-            if ($unit) {
-                $mileageSensor = $unit->wialon_mileage_sensor_id;
-                $mileageCalibrationFactor = $unit->wialon_mileage_sensor_calibration_factor;
-
-                $fuelSensor = $unit->wialon_fuel_consumption_sensor_id;
-                $fuelCalibrationFactor = $unit->wialon_fuel_consumption_sensor_calibration_factor;
-
-                return $unit->update([
-                    'wialon_nm' => $wialonUnit->nm,
-                    'fuel_consumed_litres' => intval($wialonUnit->lmsg->p->$fuelSensor * $fuelCalibrationFactor),
-                    'mileage_km' => intval($wialonUnit->lmsg->p->$mileageSensor * $mileageCalibrationFactor),
-                ]);
-            } */
-
             Unit::updateOrCreate(
                 ['wialon_id' => $wialonUnit->id],
                 [
@@ -75,6 +59,7 @@ class ImportUnits extends Command
                     'wialon_fuel_consumption_sensor_calibration_factor' => $fuelCalibrationFactor,
                     'fuel_consumed_litres' => intval($wialonUnit->lmsg->p->$fuelSensor * $fuelCalibrationFactor),
                     'mileage_km' => intval($wialonUnit->lmsg->p->$mileageSensor * $mileageCalibrationFactor),
+                    'data' => $wialonUnit,
                 ]
             );
 
