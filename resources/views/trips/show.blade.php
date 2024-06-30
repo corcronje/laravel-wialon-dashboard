@@ -18,6 +18,11 @@
                 'Distance Travelled' => number_format($trip->distance_travelled_km) . ' Km',
                 'Status' => $trip->status,
             ]" />
+            @if ($trip->mapUrl ?? false)
+                <div class="text-center">
+                    <a href="{{ $trip->mapUrl }}" target="blank">View on map</a>
+                </div>
+            @endif
         </div>
         <div class="col-md-6">
             <h5 class="border-bottom pb-3 mb-3">Previous Trip</h5>
@@ -30,6 +35,11 @@
                     'Distance Travelled' => number_format($trip->previousTrip->distance_travelled_km) . ' Km',
                     'Status' => $trip->previousTrip->status,
                 ]" />
+                @if ($trip->previousTrip->mapUrl ?? false)
+                <div class="text-center">
+                    <a href="{{ $trip->previousTrip->mapUrl }}" target="blank">View on map</a>
+                </div>
+            @endif
             @else
                 <span>No previous trip</span>
             @endif

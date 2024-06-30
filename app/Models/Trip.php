@@ -107,4 +107,22 @@ class Trip extends Model
 
         return $this->data['unit_data_end']['fuel_consumed_litres'] - $this->data['unit_data_start']['fuel_consumed_litres'];
     }
+
+    public function getMapUrlAttribute(): string
+    {
+        if(!isset($this->data['unit_data_start']))
+        {
+            return null;
+        }
+
+        if(!isset($this->data['unit_data_start']['data']))
+        {
+            return null;
+        }
+
+        $lat = $this->data['unit_data_start']['data']['pos']['x'];
+        $lng = $this->data['unit_data_start']['data']['pos']['y'];
+
+        return "https://www.google.com/maps/place/$lng,$lat";
+    }
 }
