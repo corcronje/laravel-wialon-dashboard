@@ -25,7 +25,7 @@
                 @endif
                 <td>
                     @can('view', $order)
-                        <a href="{{ route('trips.show', $order) }}" class="btn btn-sm btn-link">View</a>
+                        <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
                 </td>
             </tr>
