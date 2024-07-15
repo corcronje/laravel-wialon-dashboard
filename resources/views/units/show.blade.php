@@ -48,6 +48,9 @@
                 class="btn btn-primary">New
                 Order</a>
         @endcan
+        @can('update' , $unit)
+            <a href="{{ route('units.edit', $unit) }}" class="btn btn-secondary">Edit</a>
+        @endcan
         @can('reset', $unit)
             <form action="{{ route('units.reset', $unit) }}" method="post">
                 @csrf

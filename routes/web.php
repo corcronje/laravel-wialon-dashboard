@@ -19,7 +19,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
-    Route::resource('units', UnitController::class)->only(['index', 'show']);
+    Route::resource('units', UnitController::class)->only(['index', 'show', 'edit', 'update']);
     Route::put('units/{unit}/reset', ResetUnitController::class)->name('units.reset');
     Route::resource('drivers', DriverController::class);
     Route::resource('users', UserController::class);
