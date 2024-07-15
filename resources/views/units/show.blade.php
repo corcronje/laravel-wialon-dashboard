@@ -40,18 +40,21 @@
         'Updated' => $unit->updated_at,
     ]" />
     <hr>
-    <div class="d-flex g-3">
+    <div class="d-flex gap-2">
         @can('create', App\Models\Order::class)
             <a href="{{ route('orders.create', [
                 'unit_id' => $unit->id,
-            ]) }}" class="btn btn-primary">New
+            ]) }}"
+                class="btn btn-primary">New
                 Order</a>
         @endcan
-        <form action="{{ route('units.reset', $unit) }}" method="post">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="btn btn-warning">Reset</button>
-        </form>
+        @can('reset', $unit)
+            <form action="{{ route('units.reset', $unit) }}" method="post">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn btn-warning">Reset</button>
+            </form>
+        @endcan
         <a href="{{ route('units.index') }}" class="btn btn-link">Back</a>
     </div>
 @endsection

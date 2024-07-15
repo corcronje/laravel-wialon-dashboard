@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('fuel_replenished_litres')->nullable();
             $table->integer('mileage_km');
             $table->integer('mileage_replenished_km')->nullable();
+            $table->timestamp('reset_at')->nullable();
+            $table->foreignId('reset_by')->nullable()->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

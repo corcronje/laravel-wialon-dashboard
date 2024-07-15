@@ -27,6 +27,7 @@ class Unit extends Model
         'fuel_replenished_litres',
         'mileage_km',
         'mileage_replenished_km',
+        'reset_at',
         'data'
     ];
 

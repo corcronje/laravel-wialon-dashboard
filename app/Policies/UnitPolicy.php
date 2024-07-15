@@ -91,4 +91,16 @@ class UnitPolicy
 
         return Response::deny('You are not authorized to view units.');
     }
+
+    /**
+     * Determine whether the user can reset the model.
+     */
+    public function reset(User $user, Unit $unit): Response
+    {
+        if($user->hasRole('admin') && $unit->reset_at === null) {
+            return Response::allow();
+        }
+
+        return Response::deny('You are not authorized to view units.');
+    }
 }
