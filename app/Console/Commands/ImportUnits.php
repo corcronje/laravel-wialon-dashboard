@@ -33,7 +33,6 @@ class ImportUnits extends Command
         $bar = $this->output->createProgressBar(count($wialonUnits));
 
         foreach ($wialonUnits as $wialonUnit) {
-
             // find the unit
             $unit = Unit::where('wialon_id', $wialonUnit->id)->first();
 
@@ -44,10 +43,14 @@ class ImportUnits extends Command
                 $fuelSensor = $unit->wialon_fuel_consumption_sensor_id;
                 $fuelCalibrationFactor = $unit->wialon_fuel_consumption_sensor_calibration_factor;
             } else {
-                $mileageSensor = 'io_87';
+                // determine the sensor ids
+
+                $sensors = collect($wialonUnit->sens);
+
+                $mileageSensor = $sensors->where('n', 'Dash Mileage')->first()?->p ?? null;
                 $mileageCalibrationFactor = 0.001;
 
-                $fuelSensor = 'io_83';
+                $fuelSensor = $sensors->where('n', 'Fuel Consumed')->first()?->p ?? null;
                 $fuelCalibrationFactor = 0.1;
             }
 
