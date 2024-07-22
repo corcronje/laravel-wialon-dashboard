@@ -14,8 +14,8 @@
                 'Date' => $order->created_at->toDateTimeString(),
                 'Unit' => $order->unit->wialon_nm,
                 'Driver' => $order->driver->name,
-                'Fuel Allowed' => number_format($order->fuel_allowed_litres) . ' Litres',
-                'Fuel Replenished' => number_format($order->fuel_replenished_litres) . ' Litres',
+                //'Fuel Allowed' => number_format($order->fuel_allowed_litres) . ' Litres',
+                //'Fuel Replenished' => number_format($order->fuel_replenished_litres) . ' Litres',
                 'Distance Travelled' => number_format($order->distance_travelled_km) . ' Km',
                 'Status' => $order->status,
             ]" />
@@ -27,8 +27,8 @@
                     'Date' => $previousOrder->created_at->toDateTimeString(),
                     'Unit' => $previousOrder->unit->wialon_nm,
                     'Driver' => $previousOrder->driver->name,
-                    'Fuel Allowed' => number_format($previousOrder->fuel_allowed_litres) . ' Litres',
-                    'Fuel Replenished' => number_format($previousOrder->fuel_replenished_litres) . ' Litres',
+                    //'Fuel Allowed' => number_format($previousOrder->fuel_allowed_litres) . ' Litres',
+                    //'Fuel Replenished' => number_format($previousOrder->fuel_replenished_litres) . ' Litres',
                     'Distance Travelled' => number_format($previousOrder->distance_travelled_km) . ' Km',
                     'Status' => $previousOrder->status,
                 ]" />
