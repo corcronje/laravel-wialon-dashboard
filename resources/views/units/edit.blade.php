@@ -10,10 +10,19 @@
     <form id="edit-unit-form" action="{{ route('units.update', $unit) }}" method="post">
         @csrf
         @method('PUT')
-        <x-text-input name="wialon_mileage_sensor_id" title="wialon_mileage_sensor_id" :value="old('wialon_mileage_sensor_id', $unit->wialon_mileage_sensor_id ?? '')" placeholder="io_87" />
-        <x-text-input name="wialon_mileage_sensor_calibration_factor" title="wialon_mileage_sensor_calibration_factor" :value="old('wialon_mileage_sensor_calibration_factor', $unit->wialon_mileage_sensor_calibration_factor ?? '')" placeholder="0.001" />
-        <x-text-input name="wialon_fuel_consumption_sensor_id" title="wialon_fuel_consumption_sensor_id" :value="old('wialon_fuel_consumption_sensor_id', $unit->wialon_fuel_consumption_sensor_id ?? '')" placeholder="io_83" />
-        <x-text-input name="wialon_fuel_consumption_sensor_calibration_factor" title="wialon_fuel_consumption_sensor_calibration_factor" :value="old('wialon_fuel_consumption_sensor_calibration_factor', $unit->wialon_fuel_consumption_sensor_calibration_factor ?? '')" placeholder="0.1" />
+        <x-text-input name="wialon_mileage_sensor_id" title="Mileage Sensor Parameter" :value="old('wialon_mileage_sensor_id', $unit->wialon_mileage_sensor_id ?? '')" placeholder="io_87" />
+        <x-text-input name="wialon_mileage_sensor_calibration_factor" title="Mileage Calibration Factor" :value="old(
+            'wialon_mileage_sensor_calibration_factor',
+            $unit->wialon_mileage_sensor_calibration_factor ?? '',
+        )"
+            placeholder="0.001" />
+        <x-text-input name="wialon_fuel_consumption_sensor_id" title="Fuel Consumption Sensor Parameter" :value="old('wialon_fuel_consumption_sensor_id', $unit->wialon_fuel_consumption_sensor_id ?? '')"
+            placeholder="io_83" />
+        <x-text-input name="wialon_fuel_consumption_sensor_calibration_factor" title="Fuel Consumption Calibration Factor"
+            :value="old(
+                'wialon_fuel_consumption_sensor_calibration_factor',
+                $unit->wialon_fuel_consumption_sensor_calibration_factor ?? '',
+            )" placeholder="0.1" />
     </form>
     <hr>
     <div class="d-flex gap-2">
