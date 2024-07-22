@@ -19,7 +19,7 @@
                 <td>{{ number_format($trip->distance_travelled_km) }}</td>
                 <td>{{ number_format($trip->fuel_consumed_litres) }}</td>
                 @if ($trip->status === 'pending')
-                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td><span class="badge bg-warning">In Progress</span></td>
                 @else
                     <td><span class="badge bg-success">Closed</span></td>
                 @endif

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Driver;
 use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -29,6 +30,11 @@ class TripPolicy
      */
     public function create(User $user): Response
     {
+        /* if($driver->has('trips')->where('status', 'pending')->count() > 0)
+        {
+            return Response::deny('You can not create a trip for a driver who is currently on a trip.');
+        } */
+
         return Response::allow();
     }
 

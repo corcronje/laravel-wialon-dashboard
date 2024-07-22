@@ -18,7 +18,8 @@
         ]" />
         <hr>
         <x-text-input name="order_number" title="Order Number" :value="old('order_number')" placeholder="Order Number" />
-        <x-text-input name="fuel_replenished_litres" title="Fuel Replenished" :value="old('fuel_replenished_litres')" placeholder="Fuel Replenished (Litres)" />
+        <x-text-input name="fuel_replenished_litres" title="Final Pump Reading (Litres)" :value="old('fuel_replenished_litres')"
+            placeholder="Fuel Replenished (Litres)" />
         <hr>
         <button type="submit" class="btn btn-primary">Close Order</button>
         <a href="{{ route('orders.show', $order) }}" class="btn btn-link">Back</a>

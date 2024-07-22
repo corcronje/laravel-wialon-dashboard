@@ -21,6 +21,12 @@
                         ]) }}"
                             class="btn btn-sm btn-link">New Order</a>
                     @endcan
+                    @can('create', App\Models\Trip::class)
+                        <a href="{{ route('trips.create', [
+                            'driver_id' => $driver->id,
+                        ]) }}"
+                            class="btn btn-sm btn-link">New Trip</a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

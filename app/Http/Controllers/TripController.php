@@ -41,7 +41,7 @@ class TripController extends Controller
 
         return view('trips.create', [
             'units' => $units->pluck('wialon_nm', 'id'),
-            'drivers' => $drivers->pluck('name', 'id'),
+            'drivers' => $drivers->pluck('employee_number_and_name', 'id'),
             'driver_id' => $request->driver_id ?? null,
             'unit_id' => $request->unit_id ?? null,
         ]);
