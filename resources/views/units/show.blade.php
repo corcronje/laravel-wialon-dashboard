@@ -41,7 +41,7 @@
     ]" />
     <hr>
     <div class="d-flex gap-2">
-        @can('create', App\Models\Order::class)
+        @can('create', [App\Models\Order::class, $unit, new App\Models\Driver()])
             <a href="{{ route('orders.create', [
                 'unit_id' => $unit->id,
             ]) }}"
