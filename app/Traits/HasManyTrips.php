@@ -24,4 +24,9 @@ trait HasManyTrips
             $query->where('status', 'pending');
         });
     }
+
+    public function hasPendingTrip()
+    {
+        return $this->trips()->where('status', 'pending')->exists();
+    }
 }
