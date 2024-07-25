@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Driver;
 use App\Models\Order;
+use App\Models\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderRequest extends FormRequest
@@ -12,7 +14,10 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if($this->user()->can('create', Order::class)) {
+        $unit = Unit::find($this->unit_id);
+        $driver= Driver::find($this->driver_id);
+
+        if($this->user()->can('create', [Order::class, $unit, $driver])) {
             return true;
         }
 
