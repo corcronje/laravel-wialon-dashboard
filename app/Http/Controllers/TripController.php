@@ -25,7 +25,19 @@ class TripController extends Controller
      */
     public function create(Request $request)
     {
-        Gate::authorize('create', Trip::class);
+        $driver = new Driver();
+
+        if($request->has('driver_id')) {
+            $driver = Driver::findOrFail($request->driver_id);
+        }
+
+        $unit = new Unit();
+
+        if($request->has('unit_id')) {
+            $unit = Unit::findOrFail($request->unit_id);
+        }
+
+        Gate::authorize('create', [Trip::class, $unit, $driver]);
 
         $drivers = Driver::withoutPendingTrips()->get();
 
@@ -77,7 +89,7 @@ class TripController extends Controller
     {
         Gate::authorize('view', $trip);
 
-        $drivers = Driver::withoutPendingTrips()->get()->pluck('name', 'id');
+        $drivers = Driver::available()->get()->pluck('name', 'id');
 
         return view('trips.show', compact('trip', 'drivers'));
     }
