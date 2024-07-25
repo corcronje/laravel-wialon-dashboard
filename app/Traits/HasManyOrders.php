@@ -24,4 +24,9 @@ trait HasManyOrders
             $query->where('status', 'pending');
         });
     }
+
+    public function hasPendingOrder()
+    {
+        return $this->orders()->where('status', 'pending')->exists();
+    }
 }
