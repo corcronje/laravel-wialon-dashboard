@@ -29,11 +29,11 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        Gate::authorize('create', Order::class);
+        Gate::authorize('create', [Order::class, new Unit(), new Driver()]);
 
-        $units = Unit::all()->pluck('wialon_nm', 'id');
+        $units = Unit::available()->pluck('wialon_nm', 'id');
 
-        $drivers = Driver::all()->pluck('name', 'id');
+        $drivers = Driver::available()->pluck('name', 'id');
 
         $unit = $request->unit_id ? Unit::find($request->unit_id) : null;
 
@@ -60,6 +60,18 @@ class OrderController extends Controller
             'fuel_allowed_litres' => $unit->fuel_allowed_litres,
             'mileage_km' => $unit->mileage_km,
             'distance_travelled_km' => $unit->distance_travelled_km,
+        ]);
+
+        // automatically create a trip for the driver and unit
+        $unit->trips()->create([
+            'user_id' => auth()->id(),
+            'driver_id' => $request->driver_id,
+            'unit_id' => $request->unit_id,
+            'data' => [
+                'note' => $request->note ?? null,
+                'start_at' => now(),
+                'unit_data_start' => $unit->toArray(),
+            ],
         ]);
 
         return redirect()->route('orders.show', $order)->with('success', 'Order created successfully!');
