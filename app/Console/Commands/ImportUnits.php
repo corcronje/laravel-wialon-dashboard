@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Unit;
 use Illuminate\Console\Command;
 use Punksolid\Wialon\Unit as WialonUnit;
+use Illuminate\Support\Str;
 
 class ImportUnits extends Command
 {
@@ -35,6 +36,8 @@ class ImportUnits extends Command
         foreach ($wialonUnits as $wialonUnit) {
             // find the unit
             $unit = Unit::where('wialon_id', $wialonUnit->id)->first();
+            $mileageCalibrationFactor = 0.001;
+            $fuelCalibrationFactor = 0.1;
 
             if($unit) {
                 $mileageSensor = $unit->wialon_mileage_sensor_id;
@@ -48,20 +51,48 @@ class ImportUnits extends Command
                 $sensors = collect($wialonUnit->sens);
 
                 $mileageSensor = $sensors->where('n', 'Dash Mileage')->first()?->p ?? null;
-                $mileageCalibrationFactor = 0.001;
+
+                if(!$mileageSensor) {
+                    $mileageSensor = $sensors->where('n', 'Dash Mileage Counter')->first()?->p ?? null;
+                }
+
+                if(Str::contains($mileageSensor, '*'))
+                {
+                    $mileageSensor = explode('*', $mileageSensor)[0];
+                }
+
+                if(!$mileageSensor)
+                {
+                    $mileageSensor = 'io_107';
+                }
 
                 $fuelSensor = $sensors->where('n', 'Fuel Consumed')->first()?->p ?? null;
-                $fuelCalibrationFactor = 0.1;
+
+                if(!$fuelSensor) {
+                    $fuelSensor = $sensors->where('n', 'Fuel Consumed (counted)')->first()?->p ?? null;
+                }
+
+                if(Str::contains($fuelSensor, '*'))
+                {
+                    $fuelSensor = explode('*', $fuelSensor)[0];
+                }
+
+                if(!$fuelSensor)
+                {
+                    $fuelSensor = 'io_83';
+                }
             }
 
 
-            if (!($wialonUnit?->lmsg?->p?->$fuelSensor ?? false)) {
+            /* if (!isset($wialonUnit?->lmsg?->p?->$fuelSensor)) {
+                //dd('fuelsensor', $wialonUnit->nm, $fuelSensor, $wialonUnit->lmsg->p);
                 continue;
             }
 
-            if (!($wialonUnit?->lmsg?->p?->$mileageSensor ?? false)) {
+            if (!isset($wialonUnit?->lmsg?->p?->$mileageSensor)) {
+                //dd('mileagesensor', $wialonUnit->nm, $mileageSensor, $wialonUnit->lmsg->p);
                 continue;
-            }
+            } */
 
             if ($unit) {
                 $unit->update([
@@ -83,8 +114,8 @@ class ImportUnits extends Command
                     'wialon_mileage_sensor_calibration_factor' => $mileageCalibrationFactor,
                     'wialon_fuel_consumption_sensor_id' => $fuelSensor,
                     'wialon_fuel_consumption_sensor_calibration_factor' => $fuelCalibrationFactor,
-                    'fuel_consumed_litres' => intval($wialonUnit->lmsg->p->$fuelSensor * $fuelCalibrationFactor),
-                    'mileage_km' => intval($wialonUnit->lmsg->p->$mileageSensor * $mileageCalibrationFactor),
+                    'fuel_consumed_litres' => intval($wialonUnit->lmsg->p->$fuelSensor ?? 0 * $fuelCalibrationFactor),
+                    'mileage_km' => intval($wialonUnit->lmsg->p->$mileageSensor ?? 0 * $mileageCalibrationFactor),
                     'data' => $wialonUnit,
                 ]
             );
