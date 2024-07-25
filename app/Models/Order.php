@@ -16,6 +16,7 @@ class Order extends Model
         'unit_id',
         'user_id',
         'driver_id',
+        'order_number',
         'fuel_consumed_litres',
         'fuel_allowed_litres',
         'fuel_replenished_litres',

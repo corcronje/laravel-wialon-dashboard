@@ -23,6 +23,7 @@ class CloseOrderController extends Controller
         }
 
         $order->update([
+            'order_number' => $request->order_number,
             'fuel_replenished_ml' => $request->fuel_ml,
         ]);
 

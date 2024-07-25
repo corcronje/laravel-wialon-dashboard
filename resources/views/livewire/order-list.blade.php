@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{ $order->created_at->toDateString() }}</td>
                     <td>
-                        <a href="{{ route('orders.show', $order) }}">{{ $order->id }}</a>
+                        <a href="{{ route('orders.show', $order) }}">{{ $order->number }}</a>
                     </td>
                     <td>{{ number_format($order->fuel_replenished_litres) }}</td>
                     <td>{{ number_format($order->mileage_km) }}</td>
