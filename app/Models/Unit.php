@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Observers\UnitObserver;
 use App\Traits\HasManyOrders;
 use App\Traits\HasManyTrips;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -64,5 +65,12 @@ class Unit extends Model
         }
 
         return $this->mileage_km / $this->fuel_consumed_litres;
+    }
+
+    public function scopeAvailable(Builder $query): Builder
+    {
+        return $query->whereDoesntHave('trips', function ($query) {
+            $query->where('status', 'pending');
+        });
     }
 }
