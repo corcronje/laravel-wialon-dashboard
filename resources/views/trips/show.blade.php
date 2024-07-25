@@ -149,7 +149,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#driver_id').select2();
+            //$('#driver_id').select2();
         });
     </script>
 @endpush
