@@ -33,12 +33,12 @@ class TripPolicy
     {
         // cannot create a trip if the driver has a pending trip
         if ($driver->hasPendingTrip()) {
-            return Response::deny('The driver is out on another trip.');
+            return Response::deny('The driver is out on another shift.');
         }
 
         // cannot create a trip if the unit has a pending trip
         if ($unit->hasPendingTrip()) {
-            return Response::deny('The unit is out on another trip.');
+            return Response::deny('The unit is out on another shift.');
         }
 
         // cannot create a trip if the driver has a pending order
@@ -59,7 +59,7 @@ class TripPolicy
      */
     public function update(User $user, Trip $trip): Response
     {
-        return Response::deny('You are not allowed to update this trip.');
+        return Response::deny('You are not allowed to update this shift.');
     }
 
     /**
@@ -67,12 +67,11 @@ class TripPolicy
      */
     public function delete(User $user, Trip $trip): Response
     {
-        if($trip->status === 'pending')
-        {
+        if ($trip->status === 'pending') {
             return Response::allow();
         }
 
-        return Response::deny('You are not allowed to delete this trip.');
+        return Response::deny('You are not allowed to delete this shift.');
     }
 
     /**
@@ -80,7 +79,7 @@ class TripPolicy
      */
     public function restore(User $user, Trip $trip): Response
     {
-        return Response::deny('You are not allowed to restore this trip.');
+        return Response::deny('You are not allowed to restore this shift.');
     }
 
     /**
@@ -88,26 +87,24 @@ class TripPolicy
      */
     public function forceDelete(User $user, Trip $trip): Response
     {
-        return Response::deny('You are not allowed to delete this trip.');
+        return Response::deny('You are not allowed to delete this shift.');
     }
 
     public function close(User $user, Trip $trip): Response
     {
-        if($trip->status === 'pending')
-        {
+        if ($trip->status === 'pending') {
             return Response::allow();
         }
 
-        return Response::deny('You can not close this trip.');
+        return Response::deny('You can not close this shift.');
     }
 
     public function swap(User $user, Trip $trip): Response
     {
-        if($trip->status === 'pending')
-        {
+        if ($trip->status === 'pending') {
             return Response::allow();
         }
 
-        return Response::deny('You can not swap a driver for this trip.');
+        return Response::deny('You can not swap a driver for this shift.');
     }
 }

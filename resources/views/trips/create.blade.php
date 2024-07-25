@@ -11,7 +11,7 @@
         @csrf
         @include('trips.form')
         <hr>
-        <button type="submit" class="btn btn-primary">Create Trip</button>
+        <button type="submit" class="btn btn-primary">Create Shift</button>
         <a href="{{ route('trips.index') }}" class="btn btn-link">Back</a>
     </form>
 @endsection

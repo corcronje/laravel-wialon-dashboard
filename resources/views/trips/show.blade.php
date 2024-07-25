@@ -2,14 +2,14 @@
 
 @section('page-title')
     <div class="pb-3 mb-3 border-bottom">
-        <h2 class="m-0">Trip Detail</h2>
+        <h2 class="m-0">Shift Detail</h2>
     </div>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <h5 class="border-bottom pb-3 mb-3">Trip</h5>
+            <h5 class="border-bottom pb-3 mb-3">Sift</h5>
             <x-details :items="[
                 'Date' => $trip->created_at->toDateTimeString(),
                 'Unit' => $trip->unit->wialon_nm,
@@ -25,7 +25,7 @@
             @endif
         </div>
         <div class="col-md-6">
-            <h5 class="border-bottom pb-3 mb-3">Previous Trip</h5>
+            <h5 class="border-bottom pb-3 mb-3">Previous Shift</h5>
             @if ($trip->previousTrip)
                 <x-details :items="[
                     'Date' => $trip->previousTrip->created_at->toDateTimeString(),
@@ -41,7 +41,7 @@
                 </div>
             @endif
             @else
-                <span>No previous trip</span>
+                <span>No previous shift</span>
             @endif
         </div>
     </div>
@@ -73,7 +73,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="closeTripModalLabel">Close Trip</h1>
+                        <h1 class="modal-title fs-5" id="closeTripModalLabel">Close Shift</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -83,7 +83,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" form="close-trip-form" class="btn btn-success">Yes, close this trip</button>
+                        <button type="submit" form="close-trip-form" class="btn btn-success">Yes, close this shift</button>
                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteTripModalLabel">Delete Trip</h1>
+                        <h1 class="modal-title fs-5" id="deleteTripModalLabel">Delete Shift</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -128,11 +128,11 @@
                             class="d-inline">
                             @csrf
                             @method('delete')
-                            <span>Are you sure you want to delete this trip?</span>
+                            <span>Are you sure you want to delete this shift?</span>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" form="delete-trip-form" class="btn btn-danger">Yes, delete this trip</button>
+                        <button type="submit" form="delete-trip-form" class="btn btn-danger">Yes, delete this shift</button>
                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>

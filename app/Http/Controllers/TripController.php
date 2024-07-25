@@ -42,13 +42,13 @@ class TripController extends Controller
         $drivers = Driver::available()->get();
 
         if ($drivers->isEmpty()) {
-            return redirect()->route('trips.index')->with('error', 'All drivers are currently on trips.');
+            return redirect()->route('trips.index')->with('error', 'All drivers are currently on shifts.');
         }
 
         $units = Unit::available()->get();
 
         if ($units->isEmpty()) {
-            return redirect()->route('trips.index')->with('error', 'All units are currently on trips.');
+            return redirect()->route('trips.index')->with('error', 'All units are currently on shifts.');
         }
 
         return view('trips.create', [
@@ -79,7 +79,7 @@ class TripController extends Controller
             'data' => $data,
         ]);
 
-        return redirect()->route('trips.show', $trip)->with('success', 'Trip created successfully.');
+        return redirect()->route('trips.show', $trip)->with('success', 'Shift created successfully.');
     }
 
     /**
@@ -119,6 +119,6 @@ class TripController extends Controller
 
         $trip->delete();
 
-        return redirect()->route('trips.index')->with('success', 'Trip deleted successfully.');
+        return redirect()->route('trips.index')->with('success', 'Shift deleted successfully.');
     }
 }

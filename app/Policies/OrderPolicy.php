@@ -43,12 +43,12 @@ class OrderPolicy
 
         // cannot create an order if the driver has a pending trip and the trip's driver_id and trip's unit_id are note equal to the driver and unit ids
         if($driver->hasPendingTrip() && ($driver?->pendingTrip?->driver_id !== $driver->id || $driver?->pendingTrip?->unit_id !== $unit->id)) {
-            return Response::deny('The driver is on a trip with another unit.');
+            return Response::deny('The driver is on a shift with another unit.');
         }
 
         // cannot create an order if the unit has a pending trip and the trip's driver_id and trip's unit_id are note equal to the driver and unit ids
         if($unit->hasPendingTrip() && ($unit?->pendingTrip?->unit_id !== $unit->id || $unit?->pendingTrip?->driver_id !== $driver->id)) {
-            return Response::deny('The unit is on a trip with another driver.');
+            return Response::deny('The unit is on a shift with another driver.');
         }
 
         return $user->hasRole('admin')
