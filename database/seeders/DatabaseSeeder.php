@@ -28,7 +28,12 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Developer',
                 'email' => 'developer@test',
-                'password' => bcrypt('Developer@123'),
+                'password' => bcrypt('Developer@123'), // this is for testing purposes only
+                'role_id' => 1
+            ], [
+                'name' => 'Morne',
+                'email' => 'morne@sharetechnology.co.za',
+                'password' => bcrypt('Morne@123'), // this is for testing purposes only
                 'role_id' => 1
             ]
         ];
@@ -36,5 +41,8 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             User::create($user);
         }
+
+        // call the drivers seeder
+        $this->call(DriverSeeder::class);
     }
 }
