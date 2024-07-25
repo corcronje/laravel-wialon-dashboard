@@ -9,28 +9,28 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
         <h4>Recent Orders</h4>
-        @can('create', \App\Models\Order::class)
+        @can('create', [App\Models\Order::class, new App\Models\Unit(), new App\Models\Driver()])
             <a href="{{ route('orders.create') }}" class="btn btn-sm btn-primary">New Order</a>
         @endcan
     </div>
     @include('orders._datatable', [
         'config' => [
-            'order' => [0, 'desc'],
+            'order' => [0, 'asc'],
             'searching' => false,
             'paging' => false,
             'info' => false,
             'ordering' => false,
         ],
     ])
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center mt-5">
         <h4>Recent Trips</h4>
-        @can('create', \App\Models\Trip::class)
+        @can('create', [App\Models\Trip::class, new App\Models\Unit(), new App\Models\Driver()])
             <a href="{{ route('trips.create') }}" class="btn btn-sm btn-primary">New Trip</a>
         @endcan
     </div>
     @include('trips._datatable', [
         'config' => [
-            'order' => [0, 'desc'],
+            'order' => [0, 'asc'],
             'searching' => false,
             'paging' => false,
             'info' => false,

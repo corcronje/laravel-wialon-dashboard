@@ -17,13 +17,13 @@
                     @can('view', $unit)
                         <a href="{{ route('units.show', $unit) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
-                    @can('create', App\Models\Order::class)
+                    @can('create', [App\Models\Order::class, $unit, new App\Models\Driver()])
                         <a href="{{ route('orders.create', [
                             'unit_id' => $unit->id,
                         ]) }}"
                             class="btn btn-sm btn-link">New Order</a>
                     @endcan
-                    @can('create', App\Models\Trip::class)
+                    @can('create', [App\Models\Trip::class, $unit, new App\Models\Driver()])
                         <a href="{{ route('trips.create', [
                             'unit_id' => $unit->id,
                         ]) }}"

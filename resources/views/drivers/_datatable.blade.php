@@ -15,13 +15,13 @@
                     @can('view', $driver)
                         <a href="{{ route('drivers.show', $driver) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
-                    @can('create', App\Models\Order::class)
+                    @can('create', [App\Models\Order::class, new App\Models\Unit(), $driver])
                         <a href="{{ route('orders.create', [
                             'driver_id' => $driver->id,
                         ]) }}"
                             class="btn btn-sm btn-link">New Order</a>
                     @endcan
-                    @can('create', App\Models\Trip::class)
+                    @can('create', [App\Models\Trip::class, new App\Models\Unit(), $driver])
                         <a href="{{ route('trips.create', [
                             'driver_id' => $driver->id,
                         ]) }}"
