@@ -39,13 +39,13 @@ class TripController extends Controller
 
         Gate::authorize('create', [Trip::class, $unit, $driver]);
 
-        $drivers = Driver::withoutPendingTrips()->get();
+        $drivers = Driver::available()->get();
 
         if ($drivers->isEmpty()) {
             return redirect()->route('trips.index')->with('error', 'All drivers are currently on trips.');
         }
 
-        $units = Unit::withoutPendingTrips()->get();
+        $units = Unit::available()->get();
 
         if ($units->isEmpty()) {
             return redirect()->route('trips.index')->with('error', 'All units are currently on trips.');

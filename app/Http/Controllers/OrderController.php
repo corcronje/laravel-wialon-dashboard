@@ -31,9 +31,9 @@ class OrderController extends Controller
     {
         Gate::authorize('create', [Order::class, new Unit(), new Driver()]);
 
-        $units = Unit::available()->pluck('wialon_nm', 'id');
+        $units = Unit::available()->get()->pluck('wialon_nm', 'id');
 
-        $drivers = Driver::available()->pluck('name', 'id');
+        $drivers = Driver::available()->get()->pluck('employee_number_and_name', 'id');
 
         $unit = $request->unit_id ? Unit::find($request->unit_id) : null;
 
