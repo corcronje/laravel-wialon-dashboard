@@ -15,9 +15,7 @@ class OrderPolicy
      */
     public function viewAny(User $user): Response
     {
-        return $user->hasRole('admin')
-            ? Response::allow()
-            : Response::deny('You are not authorized to view orders.');
+        return Response::allow();
     }
 
     /**
@@ -25,9 +23,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order): Response
     {
-        return $user->id === $order->user_id
-            ? Response::allow()
-            : Response::deny('You are not authorized to view this order.');
+        return Response::allow();
     }
 
     /**
@@ -69,9 +65,11 @@ class OrderPolicy
             return Response::deny('This order has already been fulfilled.');
         }
 
-        return $user->id === $order->user_id
-            ? Response::allow()
-            : Response::deny('You are not authorized to update this order.');
+        if($user->hasRole('admin')) {
+            return Response::allow();
+        }
+
+        return Response::deny('You are not authorized to update this order.');
     }
 
     /**
