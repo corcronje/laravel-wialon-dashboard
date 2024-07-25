@@ -2,7 +2,9 @@
 
 namespace App\Policies;
 
+use App\Models\Driver;
 use App\Models\Order;
+use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -31,8 +33,28 @@ class OrderPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): Response
+    public function create(User $user, Unit $unit, Driver $driver): Response
     {
+        // cannot create an order if the driver a pending order
+        if($driver->hasPendingOrder()) {
+            return Response::deny('The driver a pending order.');
+        }
+
+        // cannot create an order if the unit a pending order
+        if($unit->hasPendingOrder()) {
+            return Response::deny('The unit has a pending order.');
+        }
+
+        // cannot create an order if the driver has a pending trip and the trip's driver_id and trip's unit_id are note equal to the driver and unit ids
+        if($driver->hasPendingTrip() && ($driver?->pendingTrip?->driver_id !== $driver->id || $driver?->pendingTrip?->unit_id !== $unit->id)) {
+            return Response::deny('The driver is on a trip with another unit.');
+        }
+
+        // cannot create an order if the unit has a pending trip and the trip's driver_id and trip's unit_id are note equal to the driver and unit ids
+        if($unit->hasPendingTrip() && ($unit?->pendingTrip?->unit_id !== $unit->id || $unit?->pendingTrip?->driver_id !== $driver->id)) {
+            return Response::deny('The unit is on a trip with another driver.');
+        }
+
         return $user->hasRole('admin')
             ? Response::allow()
             : Response::deny('You are not authorized to create orders.');
