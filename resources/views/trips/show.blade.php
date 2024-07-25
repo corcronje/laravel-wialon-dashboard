@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <h5 class="border-bottom pb-3 mb-3">Sift</h5>
+            <h5 class="border-bottom pb-3 mb-3">Shift</h5>
             <x-details :items="[
                 'Date' => $trip->created_at->toDateTimeString(),
                 'Unit' => $trip->unit->wialon_nm,
@@ -36,10 +36,10 @@
                     'Status' => $trip->previousTrip->status,
                 ]" />
                 @if ($trip->previousTrip->mapUrl ?? false)
-                <div class="text-center">
-                    <a href="{{ $trip->previousTrip->mapUrl }}" target="blank">View on map</a>
-                </div>
-            @endif
+                    <div class="text-center">
+                        <a href="{{ $trip->previousTrip->mapUrl }}" target="blank">View on map</a>
+                    </div>
+                @endif
             @else
                 <span>No previous shift</span>
             @endif
@@ -139,4 +139,17 @@
             </div>
         </div>
     @endcan
+@endpush
+
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#driver_id').select2();
+        });
+    </script>
 @endpush

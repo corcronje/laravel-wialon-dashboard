@@ -89,7 +89,7 @@ class TripController extends Controller
     {
         Gate::authorize('view', $trip);
 
-        $drivers = Driver::available()->get()->pluck('name', 'id');
+        $drivers = Driver::available()->get()->pluck('employee_number_and_name', 'id');
 
         return view('trips.show', compact('trip', 'drivers'));
     }
