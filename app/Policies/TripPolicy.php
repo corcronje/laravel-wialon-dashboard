@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Driver;
 use App\Models\Trip;
+use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -28,12 +29,27 @@ class TripPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): Response
+    public function create(User $user, Unit $unit, Driver $driver): Response
     {
-        /* if($driver->has('trips')->where('status', 'pending')->count() > 0)
-        {
-            return Response::deny('You can not create a trip for a driver who is currently on a trip.');
-        } */
+        // cannot create a trip if the driver has a pending trip
+        if ($driver->hasPendingTrip()) {
+            return Response::deny('The driver is out on another trip.');
+        }
+
+        // cannot create a trip if the unit has a pending trip
+        if ($unit->hasPendingTrip()) {
+            return Response::deny('The unit is out on another trip.');
+        }
+
+        // cannot create a trip if the driver has a pending order
+        if ($driver->hasPendingOrder()) {
+            return Response::deny('The driver has a pending order.');
+        }
+
+        // cannot create a trip if the unit has a pending order
+        if ($unit->hasPendingOrder()) {
+            return Response::deny('The unit has a pending order.');
+        }
 
         return Response::allow();
     }
