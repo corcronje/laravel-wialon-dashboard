@@ -77,13 +77,11 @@ class OrderPolicy
      */
     public function close(User $user, Order $order): Response
     {
-        if($order->status === 'closed') {
-            return Response::deny('This order is already closed.');
+        if($order->status === 'pending') {
+            return Response::allow();
         }
 
-        return $user->id === $order->user_id
-            ? Response::allow()
-            : Response::deny('You are not authorized to close this order.');
+        return Response::deny('This order is already closed.');
     }
 
 
