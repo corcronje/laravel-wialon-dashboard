@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Driver;
 use App\Models\Trip;
+use App\Models\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTripRequest extends FormRequest
@@ -12,7 +14,9 @@ class StoreTripRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Trip::class);
+        $driver = Driver::find($this->driver_id);
+        $unit = Unit::find($this->unit_id);
+        return $this->user()->can('create', [Trip::class, $unit, $driver]);
     }
 
     /**
