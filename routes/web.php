@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PumpController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResetUnitController;
 use App\Http\Controllers\SwapDriverController;
@@ -26,6 +27,7 @@ Route::middleware([
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);
     Route::resource('orders', OrderController::class);
     Route::resource('trips', TripController::class);
+    Route::resource('pumps', PumpController::class);
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('orders/{order}/close', [OrderController::class, 'close'])->name('orders.close');
