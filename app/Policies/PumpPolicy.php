@@ -13,6 +13,10 @@ class PumpPolicy
      */
     public function viewAny(User $user): Response
     {
+        if($user->isAdmin()) {
+            return Response::allow();
+        }
+
         return Response::deny('You are not authorized to view pumps.');
     }
 
@@ -21,6 +25,10 @@ class PumpPolicy
      */
     public function view(User $user, Pump $pump): Response
     {
+        if($user->isAdmin()) {
+            return Response::allow();
+        }
+
         return Response::deny('You are not authorized to view this pump.');
     }
 
