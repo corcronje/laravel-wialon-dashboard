@@ -15,4 +15,12 @@ trait BelongsToRole
     {
         return strtolower($this->role->name) === strtolower($role);
     }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
 }
