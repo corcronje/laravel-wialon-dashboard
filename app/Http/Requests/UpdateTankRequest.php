@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePumpRequest extends FormRequest
+class UpdateTankRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->route('pump'));
+        return $this->user()->can('update', $this->route('tank'));
     }
 
     /**
@@ -22,12 +22,9 @@ class UpdatePumpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'guid' => ['required', 'string', 'unique:pumps'],
-            'name' => ['required', 'string'],
-            'description' => ['sometimes', 'string'],
-            'cents_per_litre' => ['required', 'integer'],
-            'pulses_per_litre' => ['required', 'integer'],
-            'status' => ['required', 'string'],
+            'name' => 'required',
+            'volume_in_liters' => 'required',
+            'current_volume_in_liters' => 'required',
         ];
     }
 }
