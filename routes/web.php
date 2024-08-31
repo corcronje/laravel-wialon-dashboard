@@ -9,6 +9,7 @@ use App\Http\Controllers\PumpController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResetUnitController;
 use App\Http\Controllers\SwapDriverController;
+use App\Http\Controllers\TankController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
@@ -22,6 +23,7 @@ Route::middleware([
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::resource('units', UnitController::class)->only(['index', 'show', 'edit', 'update']);
     Route::put('units/{unit}/reset', ResetUnitController::class)->name('units.reset');
+    Route::resource('tanks', TankController::class);
     Route::resource('drivers', DriverController::class);
     Route::resource('users', UserController::class);
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);

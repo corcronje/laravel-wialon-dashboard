@@ -51,7 +51,7 @@ class OrderPolicy
             return Response::deny('The unit is on a shift with another driver.');
         }
 
-        return $user->hasRole('admin')
+        return $user->isAdmin()
             ? Response::allow()
             : Response::deny('You are not authorized to create orders.');
     }
@@ -65,7 +65,7 @@ class OrderPolicy
             return Response::deny('This order has already been fulfilled.');
         }
 
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -118,7 +118,7 @@ class OrderPolicy
      */
     public function restore(User $user, Order $order): Response
     {
-        return $user->hasRole('admin')
+        return $user->isAdmin()
             ? Response::allow()
             : Response::deny('You are not authorized to restore this order.');
     }
@@ -128,7 +128,7 @@ class OrderPolicy
      */
     public function forceDelete(User $user, Order $order): Response
     {
-        return $user->hasRole('admin')
+        return $user->isAdmin()
             ? Response::allow()
             : Response::deny('You are not authorized to permanently delete this order.');
     }

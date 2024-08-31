@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('mileage_replenished_km')->nullable();
             $table->timestamp('reset_at')->nullable();
             $table->foreignId('reset_by')->nullable()->constrained('users');
+            $table->json('data')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

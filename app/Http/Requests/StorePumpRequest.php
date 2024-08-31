@@ -27,7 +27,6 @@ class StorePumpRequest extends FormRequest
             'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
             'cents_per_litre' => ['required', 'integer'],
-            'volume_litres' => ['required', 'integer'],
             'pulses_per_litre' => ['required', 'integer'],
             'status' => ['required', 'string'],
         ];
