@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -24,7 +24,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -38,7 +38,7 @@ class UserPolicy
      */
     public function create(User $user): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -50,7 +50,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -64,7 +64,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -76,7 +76,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -88,7 +88,7 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 

@@ -13,7 +13,7 @@ class UnitPolicy
      */
     public function viewAny(User $user): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -25,7 +25,7 @@ class UnitPolicy
      */
     public function view(User $user, Unit $unit): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -37,7 +37,7 @@ class UnitPolicy
      */
     public function create(User $user): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -49,7 +49,7 @@ class UnitPolicy
      */
     public function update(User $user, Unit $unit): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -61,7 +61,7 @@ class UnitPolicy
      */
     public function delete(User $user, Unit $unit): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -73,7 +73,7 @@ class UnitPolicy
      */
     public function restore(User $user, Unit $unit): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -85,7 +85,7 @@ class UnitPolicy
      */
     public function forceDelete(User $user, Unit $unit): Response
     {
-        if($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -97,7 +97,7 @@ class UnitPolicy
      */
     public function reset(User $user, Unit $unit): Response
     {
-        if($user->hasRole('admin') && $unit->reset_at === null) {
+        if ($user->isAdmin() && $unit->reset_at === null) {
             return Response::allow();
         }
 
