@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Driver;
+use App\Models\Pump;
+use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +17,14 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Unit::class)->constrained();
+            $table->foreignIdFor(Pump::class)->constrained();
+            $table->foreignIdFor(Driver::class)->constrained();
+            $table->integer('volume_in_liters');
+            $table->integer('amount_in_cents');
+            $table->json('meta')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
