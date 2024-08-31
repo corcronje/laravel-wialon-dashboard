@@ -9,6 +9,7 @@ use App\Traits\HasManyFuelDips;
 use App\Traits\HasManyFuelDrops;
 use App\Traits\HasManyFuelAdjustments;
 use App\Traits\HasManyOrders;
+use App\Traits\HasManyTransactions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,6 +29,7 @@ class User extends Authenticatable
     use HasManyFuelDips;
     use HasManyFuelDrops;
     use HasManyFuelAdjustments;
+    use HasManyTransactions;
 
     /**
      * The attributes that are mass assignable.

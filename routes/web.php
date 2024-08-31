@@ -13,6 +13,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResetUnitController;
 use App\Http\Controllers\SwapDriverController;
 use App\Http\Controllers\TankController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
@@ -36,6 +37,7 @@ Route::middleware([
     Route::resource('dips', FuelDipController::class);
     Route::resource('drops', FuelDropController::class);
     Route::resource('adjustments', FuelAdjustmentController::class);
+    Route::resource('transactions', TransactionController::class);
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('orders/{order}/close', [OrderController::class, 'close'])->name('orders.close');
