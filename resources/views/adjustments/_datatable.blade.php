@@ -9,15 +9,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($dips as $dip)
+        @foreach ($adjustments as $adjustment)
             <tr>
-                <td>{{ $dip->created_at->toDateTimeString() }}</td>
-                <td>{{ $dip->tank->name }}</td>
-                <td>{{ $dip->user->name }}</td>
-                <td>{{ $dip->volume_in_litres }}</td>
+                <td>{{ $adjustment->created_at->toDateTimeString() }}</td>
+                <td>{{ $adjustment->tank->name }}</td>
+                <td>{{ $adjustment->user->name }}</td>
+                <td>{{ $adjustment->volume_in_litres }}</td>
                 <td>
-                    @can('view', $dip)
-                        <a href="{{ route('dips.show', $dip) }}" class="btn btn-sm btn-link">View</a>
+                    @can('view', $adjustment)
+                        <a href="{{ route('adjustments.show', $adjustment) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
                 </td>
             </tr>

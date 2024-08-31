@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('dips.store') }}" method="post">
+    <form action="{{ route('adjustments.store') }}" method="post">
         @csrf
-        @include('dips.form')
+        @include('adjustments.form')
         <hr>
         <button type="submit" class="btn btn-primary">Add Adjustment</button>
-        <a href="{{ route('dips.index') }}" class="btn btn-link">Back</a>
+        <a href="{{ route('adjustments.index') }}" class="btn btn-link">Back</a>
     </form>
 @endsection

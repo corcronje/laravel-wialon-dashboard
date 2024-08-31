@@ -2,9 +2,9 @@
 
 @section('page-title')
     <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
-        <h2 class="m-0">{{ $dip->tank->name }}</h2>
-        @can('update', $dip)
-            <a href="{{ route('dips.edit', $dip) }}" title="Edit" class="btn btn-sm btn-primary">Edit</a>
+        <h2 class="m-0">{{ $adjustment->tank->name }}</h2>
+        @can('update', $adjustment)
+            <a href="{{ route('adjustments.edit', $adjustment) }}" title="Edit" class="btn btn-sm btn-primary">Edit</a>
         @endcan
     </div>
 @endsection
@@ -17,7 +17,7 @@
                     <h3 class="card-title">Adjustment details</h3>
                 </div>
                 <div class="card-body">
-                    <x-details :items="$dip->toArray()" />
+                    <x-details :items="$adjustment->toArray()" />
                 </div>
             </div>
         </div>
@@ -33,15 +33,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="delete-dip-form" action="{{ route('dips.destroy', $dip) }}" method="post"
+                    <form id="delete-adjustment-form" action="{{ route('adjustments.destroy', $adjustment) }}" method="post"
                         class="d-inline">
                         @csrf
                         @method('delete')
-                        <span>Are you sure you want to delete this dip?</span>
+                        <span>Are you sure you want to delete this adjustment?</span>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="delete-dip-form" class="btn btn-danger">Yes, delete this dip</button>
+                    <button type="submit" form="delete-adjustment-form" class="btn btn-danger">Yes, delete this adjustment</button>
                     <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
