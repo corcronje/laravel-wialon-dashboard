@@ -85,6 +85,7 @@
                         <li class="nav-item"><a href="{{ route('drops.index') }}" class="nav-link">Drops</a></li>
                         <li class="nav-item"><a href="{{ route('dips.index') }}" class="nav-link">Dips</a></li>
                         <li class="nav-item"><a href="{{ route('adjustments.index') }}" class="nav-link">Adjustments</a></li>
+                        <li class="nav-item"><a href="{{ route('transactions.index') }}" class="nav-link">Transactions</a></li>
                         <li class="nav-item"><a href="{{ route('reports.index') }}" class="nav-link">Reports</a></li>
                     </ul>
                 </nav>
