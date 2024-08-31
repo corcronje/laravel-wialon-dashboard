@@ -14,35 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // create roles
-        $roles = [
-            ['name' => 'admin'],
-            ['name' => 'user'],
-        ];
-
-        foreach ($roles as $role) {
-            Role::create($role);
-        }
-
-        $users = [
-            [
-                'name' => 'Developer',
-                'email' => 'developer@test',
-                'password' => bcrypt('Developer@123'), // this is for testing purposes only
-                'role_id' => 1
-            ], [
-                'name' => 'Morne',
-                'email' => 'morne@sharetechnology.co.za',
-                'password' => bcrypt('Morne@123'), // this is for testing purposes only
-                'role_id' => 1
-            ]
-        ];
-
-        foreach ($users as $user) {
-            User::create($user);
-        }
-
-        // call the drivers seeder
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(UnitSeeder::class);
+        $this->call(TankSeeder::class);
+        $this->call(PumpSeeder::class);
         $this->call(DriverSeeder::class);
     }
 }
