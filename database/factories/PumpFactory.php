@@ -20,9 +20,8 @@ class PumpFactory extends Factory
             'name' => $this->faker->name,
             'guid' => $this->faker->uuid,
             'description' => $this->faker->sentence,
-            'cents_per_litre' => $this->faker->numberBetween(100, 2000),
-            'volume_litres' => $this->faker->numberBetween(1000, 10000),
-            'pulses_per_litre' => $this->faker->numberBetween(10, 100),
+            'cents_per_litre' => random_int(1*1000, 10*1000),
+            'pulses_per_litre' => random_int(10, 100),
             'status' => 'active',
         ];
     }
