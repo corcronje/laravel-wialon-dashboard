@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Transaction;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTransactionRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('create', Transaction::class);
     }
 
     /**
@@ -22,7 +23,10 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tank_id' => ['required', 'integer', 'exists:tanks,id'],
+            'driver_id' => ['required', 'integer', 'exists:drivers,id'],
+            'unit_id' => ['required', 'integer', 'exists:units,id'],
+            'volume_in_litres' => ['required', 'integer'],
         ];
     }
 }
