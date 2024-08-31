@@ -32,4 +32,14 @@ trait BelongsToRole
     {
         return $this->hasRole(Role::USER);
     }
+
+    public function scopeAdmins($query)
+    {
+        return $query->where('role_id', Role::ADMIN);
+    }
+
+    public function scopeUsers($query)
+    {
+        return $query->where('role_id', Role::USER);
+    }
 }
