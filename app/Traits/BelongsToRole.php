@@ -3,17 +3,18 @@
 namespace App\Traits;
 
 use App\Models\Role;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait BelongsToRole
 {
-    public function role() : \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function role() : BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
 
-    public function hasRole(string $role): bool
+    public function hasRole(int $id): bool
     {
-        return strtolower($this->role->name) === strtolower($role);
+        return $this->role_id === $id;
     }
 
     /**
@@ -21,6 +22,14 @@ trait BelongsToRole
      */
     public function isAdmin(): bool
     {
-        return $this->hasRole('admin');
+        return $this->hasRole(Role::ADMIN);
+    }
+
+    /**
+     * Check if the user is a user.
+     */
+    public function isUser(): bool
+    {
+        return $this->hasRole(Role::USER);
     }
 }
