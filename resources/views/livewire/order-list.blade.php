@@ -14,7 +14,7 @@
             <tr>
                 <th>Date</th>
                 <th>Order</th>
-                <th>Liters</th>
+                <th>litres</th>
                 <th>Kilometers</th>
             </tr>
         </thead>

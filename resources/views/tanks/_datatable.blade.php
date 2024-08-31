@@ -11,8 +11,8 @@
         @foreach ($tanks as $tank)
             <tr>
                 <td>{{ $tank->name }}</td>
-                <td>{{ $tank->volume_in_liters }}</td>
-                <td>{{ $tank->current_volume_in_liters }}</td>
+                <td>{{ $tank->volume_in_litres }}</td>
+                <td>{{ $tank->current_volume_in_litres }}</td>
                 <td>
                     @can('view', $tank)
                         <a href="{{ route('tanks.show', $tank) }}" class="btn btn-sm btn-link">View</a>

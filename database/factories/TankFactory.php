@@ -20,8 +20,8 @@ class TankFactory extends Factory
 
         return [
             'name' => $this->faker->name,
-            'volume_in_liters' => $volume,
-            'current_volume_in_liters' => $volume * 0.75,
+            'volume_in_litres' => $volume,
+            'current_volume_in_litres' => $volume * 0.75,
         ];
     }
 }

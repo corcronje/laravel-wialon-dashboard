@@ -24,8 +24,8 @@ class StoreTankRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'volume_in_liters' => 'required',
-            'current_volume_in_liters' => 'required',
+            'volume_in_litres' => 'required',
+            'current_volume_in_litres' => 'required',
         ];
     }
 }

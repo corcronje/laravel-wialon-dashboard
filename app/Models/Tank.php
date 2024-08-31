@@ -13,21 +13,21 @@ class Tank extends Model
 
     protected $fillable = [
         'name',
-        'volume_in_liters',
-        'current_volume_in_liters',
+        'volume_in_litres',
+        'current_volume_in_litres',
     ];
 
     protected $casts = [
-        'volume_in_liters' => 'integer',
-        'current_volume_in_liters' => 'integer',
+        'volume_in_litres' => 'integer',
+        'current_volume_in_litres' => 'integer',
     ];
 
-    public function pumps() : HasMany
+    public function pumps(): HasMany
     {
         return $this->hasMany(Pump::class);
     }
 
-    public function transactions() : HasMany
+    public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
