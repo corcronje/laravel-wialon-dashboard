@@ -3,6 +3,7 @@
 use App\Http\Controllers\CloseTripController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\FuelAdjustmentController;
 use App\Http\Controllers\FuelDipController;
 use App\Http\Controllers\FuelDropController;
 use App\Http\Controllers\OrderController;
@@ -34,6 +35,7 @@ Route::middleware([
     Route::resource('pumps', PumpController::class);
     Route::resource('dips', FuelDipController::class);
     Route::resource('drops', FuelDropController::class);
+    Route::resource('adjustments', FuelAdjustmentController::class);
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('orders/{order}/close', [OrderController::class, 'close'])->name('orders.close');
