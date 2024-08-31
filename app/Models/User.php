@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Traits\BelongsToRole;
 use App\Traits\HasManyFuelDips;
 use App\Traits\HasManyFuelDrops;
+use App\Traits\HasManyFuelAdjustments;
 use App\Traits\HasManyOrders;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,6 +27,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use HasManyFuelDips;
     use HasManyFuelDrops;
+    use HasManyFuelAdjustments;
 
     /**
      * The attributes that are mass assignable.
