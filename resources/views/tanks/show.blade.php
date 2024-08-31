@@ -6,20 +6,9 @@
         @can('update', $tank)
             <a href="{{ route('tanks.edit', $tank) }}" title="Edit" class="btn btn-sm btn-primary">Edit</a>
         @endcan
-        {{-- @can('delete', $tank)
-            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletetankModal">
-                Delete
-            </button>
-        @endcan
-        <a href="{{ route('tanks.index') }}" class="btn btn-linkg">Back</a> --}}
     </div>
 @endsection
 
-
-
-{{-- @section('content')
-    @livewire('order-list', ['tank' => $tank], key($tank->id))
-@endsection --}}
 
 @section('content')
     <div class="row">
@@ -41,7 +30,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deletetankModalLabel">Delete tank</h1>
+                    <h1 class="modal-title fs-5" id="deletetankModalLabel">Delete Tank</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

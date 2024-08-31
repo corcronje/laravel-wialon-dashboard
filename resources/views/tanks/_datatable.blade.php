@@ -2,11 +2,8 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
-            <th>Volume</th>
+            <th>Volume Litres</th>
             <th>Current Litres</th>
-            <th>Cents Per Litre</th>
-            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -14,11 +11,8 @@
         @foreach ($tanks as $tank)
             <tr>
                 <td>{{ $tank->name }}</td>
-                <td>{{ $tank->description }}</td>
-                <td>{{ $tank->volume_litres }}</td>
-                <td>{{ $tank->current_litres }}</td>
-                <td>{{ $tank->cents_per_litre }}</td>
-                <td>{{ $tank->status === 'active' ? 'Active' : 'Inactive' }}</td>
+                <td>{{ $tank->volume_in_liters }}</td>
+                <td>{{ $tank->current_volume_in_liters }}</td>
                 <td>
                     @can('view', $tank)
                         <a href="{{ route('tanks.show', $tank) }}" class="btn btn-sm btn-link">View</a>

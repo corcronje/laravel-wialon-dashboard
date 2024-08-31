@@ -81,6 +81,7 @@
                         <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">Users</a></li>
                         <li class="nav-item"><a href="{{ route('units.index') }}" class="nav-link">Units</a></li>
                         <li class="nav-item"><a href="{{ route('pumps.index') }}" class="nav-link">Pumps</a></li>
+                        <li class="nav-item"><a href="{{ route('tanks.index') }}" class="nav-link">Tanks</a></li>
                         <li class="nav-item"><a href="{{ route('reports.index') }}" class="nav-link">Reports</a></li>
                     </ul>
                 </nav>
