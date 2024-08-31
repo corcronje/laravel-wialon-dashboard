@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Tank;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,11 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tanks', function (Blueprint $table) {
+        Schema::create('fuel_dips', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Tank::class)->constrained();
             $table->integer('volume_in_litres');
-            $table->integer('current_volume_in_litres');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tanks');
+        Schema::dropIfExists('fuel_dips');
     }
 };

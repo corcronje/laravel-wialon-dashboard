@@ -1,21 +1,23 @@
 <table id="datatable" class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Volume Litres</th>
-            <th>Current Litres</th>
+            <th>Date</th>
+            <th>Tank</th>
+            <th>User</th>
+            <th>Litres</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($tanks as $tank)
+        @foreach ($dips as $dip)
             <tr>
-                <td>{{ $tank->name }}</td>
-                <td>{{ $tank->volume_in_litres }}</td>
-                <td>{{ $tank->current_volume_in_litres }}</td>
+                <td>{{ $dip->created_at->toDateTimeString() }}</td>
+                <td>{{ $dip->tank->name }}</td>
+                <td>{{ $dip->user->name }}</td>
+                <td>{{ $dip->volume_in_litres }}</td>
                 <td>
-                    @can('view', $tank)
-                        <a href="{{ route('tanks.show', $tank) }}" class="btn btn-sm btn-link">View</a>
+                    @can('view', $dip)
+                        <a href="{{ route('dips.show', $dip) }}" class="btn btn-sm btn-link">View</a>
                     @endcan
                 </td>
             </tr>

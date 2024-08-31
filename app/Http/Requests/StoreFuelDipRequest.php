@@ -2,17 +2,17 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Tank;
+use App\Models\FuelDip;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTankRequest extends FormRequest
+class StoreFuelDipRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Tank::class);
+        return $this->user()->can('create', FuelDip::class);
     }
 
     /**
@@ -23,9 +23,8 @@ class StoreTankRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'volume_in_litres' => 'required',
-            'current_volume_in_litres' => 'required',
+            'tank_id' => ['required', 'integer', 'exists:tanks,id'],
+            'volume_in_litres' => ['required', 'integer'],
         ];
     }
 }

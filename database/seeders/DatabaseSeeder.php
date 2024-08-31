@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TankSeeder::class);
         $this->call(PumpSeeder::class);
         $this->call(DriverSeeder::class);
+        $this->call(FuelDipSeeder::class);
     }
 }
