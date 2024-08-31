@@ -13,11 +13,7 @@ class DriverPolicy
      */
     public function viewAny(User $user): Response
     {
-        if($user->hasRole('admin')) {
-            return Response::allow();
-        }
-
-        return Response::deny('You are not authorized to view drivers.');
+        return Response::allow();
     }
 
     /**
@@ -25,11 +21,7 @@ class DriverPolicy
      */
     public function view(User $user, Driver $driver): Response
     {
-        if($user->hasRole('admin')) {
-            return Response::allow();
-        }
-
-        return Response::deny('You are not authorized to view this driver.');
+        return Response::allow();
     }
 
     /**
@@ -37,7 +29,7 @@ class DriverPolicy
      */
     public function create(User $user): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -49,7 +41,7 @@ class DriverPolicy
      */
     public function update(User $user, Driver $driver): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -65,7 +57,7 @@ class DriverPolicy
             return Response::deny('You are not authorized to delete this driver because it has orders.');
         }
 
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -77,7 +69,7 @@ class DriverPolicy
      */
     public function restore(User $user, Driver $driver): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
@@ -89,7 +81,7 @@ class DriverPolicy
      */
     public function forceDelete(User $user, Driver $driver): Response
     {
-        if($user->hasRole('admin')) {
+        if($user->isAdmin()) {
             return Response::allow();
         }
 
