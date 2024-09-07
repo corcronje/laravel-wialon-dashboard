@@ -16,9 +16,8 @@ class Pump extends Model
         'name',
         'tank_id',
         'description',
-        'cents_per_litre',
-        'volume_litres',
-        'pulses_per_litre',
+        'cents_per_millilitre',
+        'pulses_per_millilitre',
         'status',
     ];
 }
