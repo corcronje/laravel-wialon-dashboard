@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Tank;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,8 +23,8 @@ class UpdateTankRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'volume_in_litres' => 'required',
-            'current_volume_in_litres' => 'required',
+            'volume_in_millilitres' => 'required',
+            'current_volume_in_millilitres' => 'required',
         ];
     }
 }
