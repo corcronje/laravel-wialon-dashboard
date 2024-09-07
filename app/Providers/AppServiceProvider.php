@@ -27,9 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        FuelDip::observe(FuelDipObserver::class);
-        FuelDrop::observe(FuelDropObserver::class);
-        FuelAdjustment::observe(FuelAdjustmentObserver::class);
-        Transaction::observe(TransactionObserver::class);
+        //
     }
 }
