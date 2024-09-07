@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tanks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('volume_in_litres');
-            $table->integer('current_volume_in_litres');
+            $table->integer('volume_in_millilitres');
+            $table->integer('current_volume_in_millilitres');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -13,13 +13,13 @@ class Tank extends Model
 
     protected $fillable = [
         'name',
-        'volume_in_litres',
-        'current_volume_in_litres',
+        'volume_in_millilitres',
+        'current_volume_in_millilitres',
     ];
 
     protected $casts = [
-        'volume_in_litres' => 'integer',
-        'current_volume_in_litres' => 'integer',
+        'volume_in_millilitres' => 'integer',
+        'current_volume_in_millilitres' => 'integer',
     ];
 
     public function pumps(): HasMany
