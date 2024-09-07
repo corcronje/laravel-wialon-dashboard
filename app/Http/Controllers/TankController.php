@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTankRequest;
-use App\Http\Requests\UpdateTankRequest;
+use App\Http\Requests\Tank\StoreTankRequest;
+use App\Http\Requests\Tank\UpdateTankRequest;
 use App\Models\Tank;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 
 class TankController extends Controller
 {
