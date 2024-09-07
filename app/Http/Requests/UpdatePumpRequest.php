@@ -22,11 +22,12 @@ class UpdatePumpRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tank_id' => ['required', 'integer', 'exists:tanks,id'],
             'guid' => ['required', 'string', 'unique:pumps'],
             'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
-            'cents_per_litre' => ['required', 'integer'],
-            'pulses_per_litre' => ['required', 'integer'],
+            'cents_per_millilitre' => ['required', 'integer'],
+            'pulses_per_millilitre' => ['required', 'integer'],
             'status' => ['required', 'string'],
         ];
     }
