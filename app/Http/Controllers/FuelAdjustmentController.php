@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FuelAdjustment\StoreFuelAdjustmentRequest;
 use App\Models\FuelAdjustment;
 use App\Models\Tank;
+use App\Models\Transaction;
+use App\Models\TransactionType;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class FuelAdjustmentController extends Controller
@@ -38,9 +41,40 @@ class FuelAdjustmentController extends Controller
      */
     public function store(StoreFuelAdjustmentRequest $request)
     {
-        $request->user()->adjustments()->create($request->validated());
+        try {
+            // start a database transaction
+            DB::beginTransaction();
 
-        return redirect()->route('adjustments.index')->with('success', 'Fuel adjustment created successfully');
+            // create a new fuel adjustment
+            $adjustment = $request->user()->adjustments()->create($request->validated());
+
+            // check if the fuel adjustment was created successfully
+            if(!$adjustment) {
+                throw new \Exception('Failed to create fuel adjustment');
+            }
+
+            // create a new transaction
+            $transaction = $adjustment->tank->transactions()->create([
+                'transaction_type_id' => TransactionType::FUEL_ADJUSTMENT,
+                'description' => 'Fuel Adjustment - #' . $adjustment->id,
+                'user_id' => $adjustment->user_id,
+                'volume_in_millilitres' => $adjustment->volume_in_millilitres,
+            ]);
+
+            // check if the transaction was created successfully
+            if(!$transaction) {
+                throw new \Exception('Failed to create transaction');
+            }
+
+            // commit the database transaction
+            DB::commit();
+
+            return redirect()->route('adjustments.index')->with('success', 'Fuel adjustment created successfully');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return back()->with('error', 'Failed to create fuel adjustment');
+        }
     }
 
     /**
