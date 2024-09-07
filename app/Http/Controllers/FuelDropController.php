@@ -54,38 +54,4 @@ class FuelDropController extends Controller
 
         return view('drops.show', compact('drop'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FuelDrop $drop)
-    {
-        Gate::authorize('update', $drop);
-
-        $tanks = Tank::all()->pluck('name', 'id');
-
-        return view('drops.edit', compact('drop', 'tanks'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFuelDropRequest $request, FuelDrop $drop)
-    {
-        $drop->update($request->validated());
-
-        return redirect()->route('drops.index')->with('success', 'Fuel drop updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FuelDrop $drop)
-    {
-        Gate::authorize('delete', $drop);
-
-        $drop->delete();
-
-        return redirect()->route('drops.index')->with('success', 'Fuel drop deleted successfully');
-    }
 }

@@ -54,38 +54,4 @@ class FuelDipController extends Controller
 
         return view('dips.show', compact('dip'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FuelDip $dip)
-    {
-        Gate::authorize('update', $dip);
-
-        $tanks = Tank::all()->pluck('name', 'id');
-
-        return view('dips.edit', compact('dip', 'tanks'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFuelDipRequest $request, FuelDip $dip)
-    {
-        $dip->update($request->validated());
-
-        return redirect()->route('dips.index')->with('success', 'Fuel dip updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FuelDip $dip)
-    {
-        Gate::authorize('delete', $dip);
-
-        $dip->delete();
-
-        return redirect()->route('dips.index')->with('success', 'Fuel dip deleted successfully');
-    }
 }
