@@ -2,6 +2,7 @@
 
 use App\Models\Driver;
 use App\Models\Pump;
+use App\Models\TransactionType;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -21,7 +22,9 @@ return new class extends Migration
             $table->foreignIdFor(Unit::class)->constrained();
             $table->foreignIdFor(Pump::class)->constrained();
             $table->foreignIdFor(Driver::class)->constrained();
-            $table->integer('volume_in_liters');
+            $table->foreignIdFor(TransactionType::class)->constrained();
+            $table->string('description');
+            $table->integer('volume_in_millilitres');
             $table->integer('amount_in_cents');
             $table->json('meta')->nullable();
             $table->softDeletes();
