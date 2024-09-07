@@ -23,28 +23,3 @@
         </div>
     </div>
 @endsection
-
-@push('modals')
-    <div class="modal fade" id="deleteDropModal" tabindex="-1" aria-labelledby="deleteDropModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteDropModalLabel">Delete Drop</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="delete-drop-form" action="{{ route('drops.destroy', $drop) }}" method="post"
-                        class="d-inline">
-                        @csrf
-                        @method('delete')
-                        <span>Are you sure you want to delete this drop?</span>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" form="delete-drop-form" class="btn btn-danger">Yes, delete this drop</button>
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endpush

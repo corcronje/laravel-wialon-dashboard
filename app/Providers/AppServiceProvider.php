@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\FuelAdjustment;
+use App\Models\FuelDip;
+use App\Models\FuelDrop;
+use App\Models\Transaction;
+use App\Observers\FuelAdjustmentObserver;
+use App\Observers\FuelDipObserver;
+use App\Observers\FuelDropObserver;
+use App\Observers\TransactionObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

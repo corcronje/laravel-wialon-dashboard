@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\FuelAdjustment;
 
+use App\Models\FuelAdjustment;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateFuelAdjustmentRequest extends FormRequest
+class StoreFuelAdjustmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->route('adjustment'));
+        return $this->user()->can('create', FuelAdjustment::class);
     }
 
     /**
@@ -23,7 +24,8 @@ class UpdateFuelAdjustmentRequest extends FormRequest
     {
         return [
             'tank_id' => ['required', 'integer', 'exists:tanks,id'],
-            'volume_in_litres' => ['required', 'integer'],
+            'volume_in_millilitres' => ['required', 'integer'],
+            'reason' => ['required', 'string'],
         ];
     }
 }

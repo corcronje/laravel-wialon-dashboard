@@ -41,10 +41,7 @@ class FuelAdjustmentPolicy
      */
     public function update(User $user, FuelAdjustment $adjustment): Response
     {
-        if ($user->isAdmin()) {
-            return Response::allow();
-        }
-
+        // fuel adjustments are immutable
         return Response::deny('You do not have permission to update a fuel adjustment');
     }
 
@@ -53,10 +50,7 @@ class FuelAdjustmentPolicy
      */
     public function delete(User $user, FuelAdjustment $adjustment): Response
     {
-        if ($user->isAdmin()) {
-            return Response::allow();
-        }
-
+        // fuel adjustments are immutable
         return Response::deny('You do not have permission to delete a fuel adjustment');
     }
 
@@ -65,10 +59,7 @@ class FuelAdjustmentPolicy
      */
     public function restore(User $user, FuelAdjustment $adjustment): Response
     {
-        if ($user->isAdmin()) {
-            return Response::allow();
-        }
-
+        // fuel adjustments are immutable
         return Response::deny('You do not have permission to restore a fuel adjustment');
     }
 
@@ -77,10 +68,7 @@ class FuelAdjustmentPolicy
      */
     public function forceDelete(User $user, FuelAdjustment $adjustment): Response
     {
-        if ($user->isAdmin()) {
-            return Response::allow();
-        }
-
+        // fuel adjustments are immutable
         return Response::deny('You do not have permission to permanently delete a fuel adjustment');
     }
 }

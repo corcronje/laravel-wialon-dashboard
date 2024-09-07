@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tank>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TransactionType>
  */
-class TankFactory extends Factory
+class TransactionTypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,12 +16,8 @@ class TankFactory extends Factory
      */
     public function definition(): array
     {
-        $volume = $this->faker->randomNumber(5);
-
         return [
             'name' => $this->faker->name,
-            'volume_in_millilitres' => $volume,
-            'current_volume_in_millilitres' => $volume * 0.75,
         ];
     }
 }

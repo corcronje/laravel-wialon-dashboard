@@ -52,54 +52,6 @@ class FuelAdjustmentTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // a user cannot view the fuel adjustments edit page
-    public function test_user_cannot_view_the_fuel_adjustments_edit_page()
-    {
-        $user = $this->newUser();
-
-        $adjustment = FuelAdjustment::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('adjustments.edit', $adjustment));
-
-        $response->assertStatus(403);
-    }
-
-    // a admin user can view the fuel adjustments edit page
-    public function test_admin_user_can_view_the_fuel_adjustments_edit_page()
-    {
-        $user = $this->newAdminUser();
-
-        $adjustment = FuelAdjustment::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('adjustments.edit', $adjustment));
-
-        $response->assertStatus(200);
-    }
-
-    // a user cannot delete a fuel adjustment
-    public function test_user_cannot_delete_a_fuel_adjustment()
-    {
-        $user = $this->newUser();
-
-        $adjustment = FuelAdjustment::factory()->create();
-
-        $response = $this->actingAs($user)->delete(route('adjustments.destroy', $adjustment));
-
-        $response->assertStatus(403);
-    }
-
-    // a admin user can delete a fuel adjustment
-    public function test_admin_user_can_delete_a_fuel_adjustment()
-    {
-        $user = $this->newAdminUser();
-
-        $adjustment = FuelAdjustment::factory()->create();
-
-        $response = $this->actingAs($user)->delete(route('adjustments.destroy', $adjustment));
-
-        $response->assertStatus(302);
-    }
-
     // a user cannot create a fuel adjustment
     public function test_user_cannot_create_a_fuel_adjustment()
     {
@@ -109,7 +61,7 @@ class FuelAdjustmentTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('adjustments.store'), [
             'tank_id' => $tank->id,
-            'volume_in_litres' => 1000
+            'volume_in_millilitres' => 1000
         ]);
 
         $response->assertStatus(403);
@@ -122,43 +74,19 @@ class FuelAdjustmentTest extends TestCase
 
         $tank = Tank::factory()->create();
 
+        $tankVolume = $tank->volume_in_millilitres;
+
+        $adjustmentVolume = rand(-1000, 1000);
+
         $response = $this->actingAs($user)->post(route('adjustments.store'), [
             'tank_id' => $tank->id,
-            'volume_in_litres' => 1000
+            'volume_in_millilitres' => $adjustmentVolume
         ]);
 
         $response->assertStatus(302);
-    }
 
-    // a user cannot update a fuel adjustment
-    public function test_user_cannot_update_a_fuel_adjustment()
-    {
-        $user = $this->newUser();
+        $tank->refresh();
 
-        $adjustment = FuelAdjustment::factory()->create();
-
-        $data = FuelAdjustment::factory()->make();
-
-        $response = $this->actingAs($user)->put(route('adjustments.update', $adjustment), $data->toArray());
-
-        $response->assertStatus(403);
-    }
-
-    // a admin user can update a fuel adjustment
-    public function test_admin_user_can_update_a_fuel_adjustment()
-    {
-        $user = $this->newAdminUser();
-
-        $adjustment = FuelAdjustment::factory()->create();
-
-        $data = FuelAdjustment::factory()->make();
-
-        $response = $this->actingAs($user)->put(route('adjustments.update', $adjustment), $data->toArray());
-
-        $updated = FuelAdjustment::find($adjustment->id);
-
-        $this->assertEquals($data->volume_in_litres, $updated->volume_in_litres);
-
-        $response->assertStatus(302);
+        $this->assertEquals($tank->volume_in_millilitres, $tankVolume + $adjustmentVolume);
     }
 }

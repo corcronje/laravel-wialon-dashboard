@@ -34,10 +34,10 @@ Route::middleware([
     Route::resource('orders', OrderController::class);
     Route::resource('trips', TripController::class);
     Route::resource('pumps', PumpController::class);
-    Route::resource('dips', FuelDipController::class);
-    Route::resource('drops', FuelDropController::class);
-    Route::resource('adjustments', FuelAdjustmentController::class);
-    Route::resource('transactions', TransactionController::class);
+    Route::resource('dips', FuelDipController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('drops', FuelDropController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('adjustments', FuelAdjustmentController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('transactions', TransactionController::class)->only(['index', 'create', 'store', 'show']);
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('orders/{order}/close', [OrderController::class, 'close'])->name('orders.close');

@@ -52,54 +52,6 @@ class TransactionTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // a user cannot view the transactions edit page
-    public function test_user_cannot_view_the_transactions_edit_page()
-    {
-        $user = $this->newUser();
-
-        $transaction = Transaction::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('transactions.edit', $transaction));
-
-        $response->assertStatus(403);
-    }
-
-    // a admin user can view the transactions edit page
-    public function test_admin_user_can_view_the_transactions_edit_page()
-    {
-        $user = $this->newAdminUser();
-
-        $transaction = Transaction::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('transactions.edit', $transaction));
-
-        $response->assertStatus(200);
-    }
-
-    // a user cannot delete a transaction
-    public function test_user_cannot_delete_a_transaction()
-    {
-        $user = $this->newUser();
-
-        $transaction = Transaction::factory()->create();
-
-        $response = $this->actingAs($user)->delete(route('transactions.destroy', $transaction));
-
-        $response->assertStatus(403);
-    }
-
-    // a admin user can delete a transaction
-    public function test_admin_user_can_delete_a_transaction()
-    {
-        $user = $this->newAdminUser();
-
-        $transaction = Transaction::factory()->create();
-
-        $response = $this->actingAs($user)->delete(route('transactions.destroy', $transaction));
-
-        $response->assertStatus(302);
-    }
-
     // a user cannot create a transaction
     public function test_user_cannot_create_a_transaction()
     {
@@ -126,38 +78,6 @@ class TransactionTest extends TestCase
             'tank_id' => $tank->id,
             'volume_in_litres' => 1000
         ]);
-
-        $response->assertStatus(302);
-    }
-
-    // a user cannot update a transaction
-    public function test_user_cannot_update_a_transaction()
-    {
-        $user = $this->newUser();
-
-        $transaction = Transaction::factory()->create();
-
-        $data = Transaction::factory()->make();
-
-        $response = $this->actingAs($user)->put(route('transactions.update', $transaction), $data->toArray());
-
-        $response->assertStatus(403);
-    }
-
-    // a admin user can update a transaction
-    public function test_admin_user_can_update_a_transaction()
-    {
-        $user = $this->newAdminUser();
-
-        $transaction = Transaction::factory()->create();
-
-        $data = Transaction::factory()->make();
-
-        $response = $this->actingAs($user)->put(route('transactions.update', $transaction), $data->toArray());
-
-        $updated = Transaction::find($transaction->id);
-
-        $this->assertEquals($data->volume_in_litres, $updated->volume_in_litres);
 
         $response->assertStatus(302);
     }
