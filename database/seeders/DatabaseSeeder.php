@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DriverSeeder::class);
         $this->call(FuelDipSeeder::class);
         $this->call(FuelDropSeeder::class);
+        $this->call(TransactionTypeSeeder::class);
     }
 }
