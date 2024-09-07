@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\FuelAdjustment;
 
 use App\Models\FuelAdjustment;
 use Illuminate\Foundation\Http\FormRequest;
