@@ -144,4 +144,22 @@ class DriverTest extends TestCase
 
         $response->assertStatus(403);
     }
+
+    public function test_pump_can_retrieve_a_list_of_drivers_from_the_api()
+    {
+        $pump = $this->newPump();
+
+        Driver::factory(10)->create();
+
+        $response = $this->getJson(route('api.drivers.index') . '?pump=' . $pump->guid);
+
+        $response->assertStatus(200);
+    }
+
+    public function test_someone_without_permission_cannot_retrieve_a_list_of_drivers_from_the_api()
+    {
+        $response = $this->getJson(route('api.drivers.index'));
+
+        $response->assertStatus(422);
+    }
 }

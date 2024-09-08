@@ -23,10 +23,10 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tank_id' => ['required', 'integer', 'exists:tanks,id'],
-            'driver_id' => ['required', 'integer', 'exists:drivers,id'],
-            'unit_id' => ['required', 'integer', 'exists:units,id'],
-            'volume_in_litres' => ['required', 'integer'],
+            'transaction_type_id' => 'required|exists:transaction_types,id',
+            'description' => 'required|string',
+            'volume_in_millilitres' => 'required|integer',
+            'amount_in_cents' => 'required|integer',
         ];
     }
 }
