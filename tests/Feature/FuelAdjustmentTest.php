@@ -60,6 +60,7 @@ class FuelAdjustmentTest extends TestCase
         $tank = Tank::factory()->create();
 
         $response = $this->actingAs($user)->post(route('adjustments.store'), [
+            'reason' => 'Fuel adjustment test',
             'tank_id' => $tank->id,
             'volume_in_millilitres' => 1000
         ]);
@@ -79,11 +80,16 @@ class FuelAdjustmentTest extends TestCase
         $adjustmentVolume = rand(-1000, 1000);
 
         $response = $this->actingAs($user)->post(route('adjustments.store'), [
+            'reason' => 'Fuel adjustment test',
             'tank_id' => $tank->id,
             'volume_in_millilitres' => $adjustmentVolume
         ]);
 
         $response->assertStatus(302);
+
+        $response->assertSessionHasNoErrors();
+
+        $response->assertRedirect(route('adjustments.index'));
 
         $tank->refresh();
 
