@@ -22,6 +22,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\EnsurePumpGuidIsPresentAndValid;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -51,7 +52,7 @@ Route::middleware([
     Route::post('trips/{trip}/swap', SwapDriverController::class)->name('trips.swap');
 });
 
-Route::prefix('api')->name('api.')->group(function () {
+Route::middleware(EnsurePumpGuidIsPresentAndValid::class)->prefix('api')->name('api.')->group(function () {
     Route::resource('transactions', ApiTransactionController::class)->only(['create']);
     Route::resource('drivers', ApiDriverController::class)->only(['index']);
     Route::resource('pumps', ApiPumpController::class)->only(['index']);
