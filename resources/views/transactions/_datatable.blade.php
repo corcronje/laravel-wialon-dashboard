@@ -2,7 +2,6 @@
     <thead>
         <tr>
             <th>Date</th>
-            <th>Tank</th>
             <th>User</th>
             <th>Litres</th>
             <th>Actions</th>
@@ -12,9 +11,8 @@
         @foreach ($transactions as $transaction)
             <tr>
                 <td>{{ $transaction->created_at->toDateTimeString() }}</td>
-                <td>{{ $transaction->pump->name }}</td>
                 <td>{{ $transaction->user->name }}</td>
-                <td>{{ $transaction->volume_in_litres }}</td>
+                <td>{{ $transaction->volume_in_milliliters }}</td>
                 <td>
                     @can('view', $transaction)
                         <a href="{{ route('transactions.show', $transaction) }}" class="btn btn-sm btn-link">View</a>
