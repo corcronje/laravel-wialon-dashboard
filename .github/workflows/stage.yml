@@ -1,0 +1,27 @@
+name: Deploy for Staging
+
+# Trigger the workflow on push and
+# pull request events on the staging branch
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+
+# Authenticate to the the server via ssh
+# and run our deployment script
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGE_HOST }}
+          username: ${{ secrets.STAGE_USERNAME }}
+          port: ${{ secrets.STAGE_PORT }}
+          key: ${{ secrets.STAGE_SSHKEY }}
+          script: "cd /var/www/html/stage && ./.scripts/stage.sh"
