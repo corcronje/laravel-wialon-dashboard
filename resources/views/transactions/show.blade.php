@@ -2,7 +2,7 @@
 
 @section('page-title')
     <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
-        <h2 class="m-0">{{ $transaction->pump->name }}</h2>
+        <h2 class="m-0">{{ $transaction->id }}</h2>
     </div>
 @endsection
 
