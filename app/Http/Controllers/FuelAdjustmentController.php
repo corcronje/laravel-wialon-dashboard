@@ -48,23 +48,24 @@ class FuelAdjustmentController extends Controller
             // create a new fuel adjustment
             $adjustment = $request->user()->adjustments()->create($request->validated());
 
-            // check if the fuel adjustment was created successfully
-            if(!$adjustment) {
-                throw new \Exception('Failed to create fuel adjustment');
-            }
-
             // create a new transaction
-            $transaction = $adjustment->tank->transactions()->create([
+            $request->user()->transactions()->create([
                 'transaction_type_id' => TransactionType::FUEL_ADJUSTMENT,
                 'description' => 'Fuel Adjustment - #' . $adjustment->id,
                 'user_id' => $adjustment->user_id,
                 'volume_in_millilitres' => $adjustment->volume_in_millilitres,
+                'amount_in_cents' => 0,
+                'meta' => [
+                    'adjustment_id' => $adjustment->id,
+                    'tank_id' => $adjustment->tank_id,
+                    'reason' => $adjustment->reason,
+                ],
             ]);
 
-            // check if the transaction was created successfully
-            if(!$transaction) {
-                throw new \Exception('Failed to create transaction');
-            }
+            // update the tank volume
+            $adjustment->tank->update([
+                'volume_in_millilitres' => $adjustment->tank->volume_in_millilitres + $adjustment->volume_in_millilitres,
+            ]);
 
             // commit the database transaction
             DB::commit();
@@ -73,7 +74,9 @@ class FuelAdjustmentController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return back()->with('error', 'Failed to create fuel adjustment');
+            dd($th->getMessage());
+
+            return back()->with('error', $th->getMessage());
         }
     }
 
