@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Order;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -51,6 +52,8 @@ class OrderTest extends TestCase
     public function test_user_can_view_a_single_order()
     {
         $user = $this->newUser();
+
+        Order::factory()->create();
 
         $response = $this->actingAs($user)->getJson(route('orders.show', 1));
 
