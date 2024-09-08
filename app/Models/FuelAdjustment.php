@@ -15,6 +15,6 @@ class FuelAdjustment extends Model
     protected $fillable = [
         'user_id',
         'tank_id',
-        'volume_in_litres',
+        'volume_in_millilitres',
     ];
 }
