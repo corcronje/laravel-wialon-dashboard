@@ -31,12 +31,11 @@ class PumpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pump $pump)
+    public function show(string $guid)
     {
-        // not allowed
-        return response()->json([
-            'message' => 'Not allowed'
-        ], 403);
+        $pump = Pump::where('guid', $guid)->firstOrFail();
+
+        return PumpResource::make($pump);
     }
 
     /**
