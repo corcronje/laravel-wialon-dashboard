@@ -15,10 +15,6 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $request->validate([
-            'pump' => 'required|exists:pumps,guid',
-        ]);
-
         $pump = Pump::where('guid', $request->pump)->first();
 
         if(!$pump) {

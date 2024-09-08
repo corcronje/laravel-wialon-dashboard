@@ -26,10 +26,6 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        $request->validate([
-            'pump' => 'required|exists:pumps,guid',
-        ]);
-
         $pump = Pump::where('guid', $request->pump)->first();
 
         if(!$pump) {

@@ -14,10 +14,6 @@ class DriverController extends Controller
      */
     public function index(Request $request)
     {
-        $request->validate([
-            'pump' => 'required|exists:pumps,guid',
-        ]);
-
         return DriverResource::collection(Driver::all());
     }
 
