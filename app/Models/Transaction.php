@@ -16,12 +16,14 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
-        'driver_id',
-        'unit_id',
-        'pump_id',
         'transaction_type_id',
         'description',
         'volume_in_millilitres',
         'amount_in_cents',
+        'meta',
+    ];
+
+    protected $casts = [
+        'meta' => 'array',
     ];
 }

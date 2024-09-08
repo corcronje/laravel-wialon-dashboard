@@ -19,9 +19,6 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Unit::class)->constrained();
-            $table->foreignIdFor(Pump::class)->constrained();
-            $table->foreignIdFor(Driver::class)->constrained();
             $table->foreignIdFor(TransactionType::class)->constrained();
             $table->string('description');
             $table->integer('volume_in_millilitres');
