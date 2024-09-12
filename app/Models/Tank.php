@@ -14,13 +14,23 @@ class Tank extends Model
     protected $fillable = [
         'name',
         'volume_in_millilitres',
-        'current_volume_in_millilitres',
+        'current_volume_in_millilitres'
     ];
 
     protected $casts = [
         'volume_in_millilitres' => 'integer',
         'current_volume_in_millilitres' => 'integer',
     ];
+
+    public function getVolumeInLitresAttribute(): float
+    {
+        return $this->volume_in_millilitres / 1000;
+    }
+
+    public function getCurrentVolumeInLitresAttribute(): float
+    {
+        return $this->current_volume_in_millilitres / 1000;
+    }
 
     public function pumps(): HasMany
     {

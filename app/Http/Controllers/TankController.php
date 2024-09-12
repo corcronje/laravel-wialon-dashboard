@@ -34,7 +34,11 @@ class TankController extends Controller
      */
     public function store(StoreTankRequest $request)
     {
-        Tank::create($request->validated());
+        Tank::create([
+            'name' => $request->name,
+            'volume_in_millilitres' => $request->volume_in_litres * 1000,
+            'current_volume_in_millilitres' => 0,
+        ]);
 
         return redirect()->route('tanks.index')->with('success', 'Tank created successfully.');
     }
@@ -64,7 +68,10 @@ class TankController extends Controller
      */
     public function update(UpdateTankRequest $request, Tank $tank)
     {
-        $tank->update($request->validated());
+        $tank->update([
+            'name' => $request->name,
+            'volume_in_millilitres' => $request->volume_in_litres * 1000,
+        ]);
 
         return redirect()->route('tanks.show', $tank)->with('success', 'Tank updated successfully.');
     }
