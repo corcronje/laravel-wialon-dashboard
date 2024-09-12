@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePumpRequest;
-use App\Http\Requests\UpdatePumpRequest;
+use App\Http\Requests\Pump\StorePumpRequest;
+use App\Http\Requests\Pump\UpdatePumpRequest;
 use App\Models\Pump;
+use App\Models\Tank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class PumpController extends Controller
 {
@@ -29,7 +31,9 @@ class PumpController extends Controller
     {
         Gate::authorize('create', Pump::class);
 
-        return view('pumps.create');
+        $tanks = Tank::all()->pluck('name', 'id');
+
+        return view('pumps.create', compact('tanks'));
     }
 
     /**
@@ -37,7 +41,15 @@ class PumpController extends Controller
      */
     public function store(StorePumpRequest $request)
     {
-        Pump::create($request->validated());
+        Pump::create([
+            'tank_id' => $request->tank_id,
+            'guid' => Str::uuid(),
+            'name' => $request->name,
+            'description' => $request->description,
+            'cents_per_millilitre' => $request->cents_per_litre * 100,
+            'pulses_per_millilitre' => $request->pulses_per_litre * 1000,
+            'status' => 'active',
+        ]);
 
         return redirect()->route('pumps.index')->with('success', 'Pump created successfully.');
     }
@@ -59,7 +71,9 @@ class PumpController extends Controller
     {
         Gate::authorize('update', $pump);
 
-        return view('pumps.edit', compact('pump'));
+        $tanks = Tank::all()->pluck('name', 'id');
+
+        return view('pumps.edit', compact('pump', 'tanks'));
     }
 
     /**
@@ -67,7 +81,15 @@ class PumpController extends Controller
      */
     public function update(UpdatePumpRequest $request, Pump $pump)
     {
-        $pump->update($request->validated());
+        $pump->update([
+            'tank_id' => $request->tank_id,
+            'guid' => Str::uuid(),
+            'name' => $request->name,
+            'description' => $request->description,
+            'cents_per_millilitre' => $request->cents_per_litre * 100,
+            'pulses_per_millilitre' => $request->pulses_per_litre * 1000,
+            'status' => 'active',
+        ]);
 
         return redirect()->route('pumps.index')->with('success', 'Pump updated successfully.');
     }

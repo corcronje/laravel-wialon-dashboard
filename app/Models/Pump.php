@@ -20,4 +20,29 @@ class Pump extends Model
         'pulses_per_millilitre',
         'status',
     ];
+
+    protected $casts = [
+        'cents_per_millilitre' => 'integer',
+        'pulses_per_millilitre' => 'integer',
+    ];
+
+    public function getCentsPerLitreAttribute() : float
+    {
+        return $this->cents_per_millilitre / 100;
+    }
+
+    public function getPulsesPerLitreAttribute() : float
+    {
+        return $this->pulses_per_millilitre / 1000;
+    }
+
+    public function tank() : \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Tank::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
