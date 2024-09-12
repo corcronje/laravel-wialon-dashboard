@@ -22,16 +22,12 @@
 @endsection --}}
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3 class="card-title">Pump details</h3>
-                </div>
-                <div class="card-body">
-                    <x-details :items="$pump->toArray()" />
-                </div>
-            </div>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">Pump details</h3>
+        </div>
+        <div class="card-body">
+            <x-details :items="$pump->toArray()" />
         </div>
     </div>
 @endsection
