@@ -2,10 +2,7 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
-            <th>Volume</th>
-            <th>Current Litres</th>
-            <th>Cents Per Litre</th>
+            <th>Rand/Litre</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -14,10 +11,7 @@
         @foreach ($pumps as $pump)
             <tr>
                 <td>{{ $pump->name }}</td>
-                <td>{{ $pump->description }}</td>
-                <td>{{ $pump->volume_litres }}</td>
-                <td>{{ $pump->current_litres }}</td>
-                <td>{{ $pump->cents_per_litre }}</td>
+                <td>{{ number_format($pump->cents_per_litre / 100, 2) }}</td>
                 <td>{{ $pump->status === 'active' ? 'Active' : 'Inactive' }}</td>
                 <td>
                     @can('view', $pump)
