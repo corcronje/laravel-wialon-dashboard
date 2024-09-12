@@ -8,8 +8,8 @@
                     $value = implode(', ', $value);
                 }
             @endphp
-            <dt class="col-12 col-md-4 text-md-end">{{ $label }}</dt>
-            <dd class="col-12 col-md-8">{{ $value }}</dd>
+            <dt class="col-12 col-md-4 col-lg-3 text-md-end">{{ $label }}</dt>
+            <dd class="col-12 col-md-8 col-lg-9">{{ $value }}</dd>
         @endforeach
     </dl>
 @endif
