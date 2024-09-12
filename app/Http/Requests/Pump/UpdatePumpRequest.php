@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Pump;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,11 +23,10 @@ class UpdatePumpRequest extends FormRequest
     {
         return [
             'tank_id' => ['required', 'integer', 'exists:tanks,id'],
-            'guid' => ['required', 'string', 'unique:pumps'],
             'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
-            'cents_per_millilitre' => ['required', 'integer'],
-            'pulses_per_millilitre' => ['required', 'integer'],
+            'cents_per_litre' => ['required', 'integer'],
+            'pulses_per_litre' => ['required', 'integer'],
             'status' => ['required', 'string'],
         ];
     }
