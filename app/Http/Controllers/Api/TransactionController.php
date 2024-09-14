@@ -65,12 +65,11 @@ class TransactionController extends Controller
             'description' => $request->description,
             'volume_in_millilitres' => $volumeInMillilitres,
             'amount_in_cents' => $request->amount_in_cents,
-            'meta' => [
-                'pump' => $pump,
-                'driver' => $driver,
-                'unit' => $unit
-            ],
-            'user_id' => 1
+            'meta' => [],
+            'user_id' => 1,
+            'driver_id' => $driver->id,
+            'pump_id' => $pump->id,
+            'unit_id' => $unit->id
         ]);
 
         return response()->json([
