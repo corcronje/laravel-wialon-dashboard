@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Tank</th>
             <th>Rand/Litre</th>
             <th>Status</th>
             <th>Actions</th>
@@ -11,6 +12,7 @@
         @foreach ($pumps as $pump)
             <tr>
                 <td>{{ $pump->name }}</td>
+                <td>{{ $pump->tank->name }}</td>
                 <td>{{ number_format($pump->cents_per_litre / 100, 2) }}</td>
                 <td>{{ $pump->status === 'active' ? 'Active' : 'Inactive' }}</td>
                 <td>
