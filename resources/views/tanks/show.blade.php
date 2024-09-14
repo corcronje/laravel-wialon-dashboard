@@ -12,10 +12,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    <h3 class="card-title">tank details</h3>
+                    <h3 class="card-title">Detail</h3>
                 </div>
                 <div class="card-body">
                     <x-details :items="$tank->toArray()" />
