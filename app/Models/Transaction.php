@@ -16,6 +16,9 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
+        'driver_id',
+        'pump_id',
+        'unit_id',
         'transaction_type_id',
         'description',
         'volume_in_millilitres',
