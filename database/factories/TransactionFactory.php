@@ -49,6 +49,9 @@ class TransactionFactory extends Factory
 
         return [
             'user_id' => $user->id,
+            'driver_id' => $driver->id,
+            'pump_id' => $pump->id,
+            'unit_id' => $unit->id,
             'transaction_type_id' => $type->id,
             'description' => $this->faker->sentence,
             'volume_in_millilitres' => random_int(100 * 1000, 1000 * 1000),
