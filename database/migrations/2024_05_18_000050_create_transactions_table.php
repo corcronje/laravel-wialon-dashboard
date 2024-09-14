@@ -20,6 +20,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(TransactionType::class)->constrained();
+            $table->foreignIdFor(Driver::class)->nullable()->constrained();
+            $table->foreignIdFor(Pump::class)->nullable()->constrained();
+            $table->foreignIdFor(Unit::class)->nullable()->constrained();
             $table->string('description');
             $table->integer('volume_in_millilitres');
             $table->integer('amount_in_cents');
