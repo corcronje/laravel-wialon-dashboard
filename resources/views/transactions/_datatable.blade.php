@@ -13,9 +13,9 @@
         @foreach ($transactions as $transaction)
             <tr>
                 <td>{{ $transaction->created_at->toDateTimeString() }}</td>
-                <td>{{ $transaction->meta["pump"]["name"] ?? '-' }}</td>
-                <td>{{ $transaction->meta["unit"]["wialon_nm"] ?? '-' }}</td>
-                <td>{{ $transaction->meta["driver"]["name"] ?? '-' }}</td>
+                <td>{{ $transaction->pump?->name ?? '-' }}</td>
+                <td>{{ $transaction->unit?->wialon_nm ?? '-' }}</td>
+                <td>{{ $transaction->driver?->name ?? '-' }}</td>
                 <td>{{ number_format($transaction->volume_in_millilitres / 1000, 2) }}</td>
                 <td>
                     @can('view', $transaction)
