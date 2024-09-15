@@ -14,12 +14,12 @@ class FuelDropObserver
     public function created(FuelDrop $fuelDrop): void
     {
         Transaction::create([
-            'transaction_type_id' => TransactionType::FUEL_ADJUSTMENT,
+            'transaction_type_id' => TransactionType::FUEL_DROP,
             'description' => 'Fuel Drop',
             'volume_in_millilitres' => abs($fuelDrop->volume_in_millilitres),
             'amount_in_cents' => 0,
             'meta' => [
-                'adjustment' => $fuelDrop,
+                'drop' => $fuelDrop,
             ],
             'user_id' => $fuelDrop->user_id,
             'tank_id' => $fuelDrop->tank_id,
