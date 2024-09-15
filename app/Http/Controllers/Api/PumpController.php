@@ -33,7 +33,7 @@ class PumpController extends Controller
      */
     public function show(Request $request, $pump)
     {
-        $pump = Pump::where('guid', $$request->pump)->firstOrFail();
+        $pump = Pump::where('guid', $request->pump)->firstOrFail();
 
         return PumpResource::make($pump);
     }
