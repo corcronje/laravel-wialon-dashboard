@@ -41,7 +41,11 @@ class FuelAdjustmentController extends Controller
      */
     public function store(StoreFuelAdjustmentRequest $request)
     {
-        $request->user()->adjustments()->create($request->validated());
+        $request->user()->adjustments()->create([
+            'tank_id' => $request->tank_id,
+            'volume_in_millilitres' => $request->volume_in_litres * 1000,
+            'reason' => $request->reason,
+        ]);
 
         return redirect()->route('adjustments.index')->with('success', 'Fuel adjustment created successfully');
     }
