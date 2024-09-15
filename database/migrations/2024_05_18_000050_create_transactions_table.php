@@ -2,6 +2,7 @@
 
 use App\Models\Driver;
 use App\Models\Pump;
+use App\Models\Tank;
 use App\Models\TransactionType;
 use App\Models\Unit;
 use App\Models\User;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(TransactionType::class)->constrained();
             $table->foreignIdFor(Driver::class)->nullable()->constrained();
+            $table->foreignIdFor(Tank::class)->nullable()->constrained();
             $table->foreignIdFor(Pump::class)->nullable()->constrained();
             $table->foreignIdFor(Unit::class)->nullable()->constrained();
             $table->string('description');
