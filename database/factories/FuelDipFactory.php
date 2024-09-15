@@ -22,18 +22,18 @@ class FuelDipFactory extends Factory
         $tank = Tank::all()->random();
         $user = User::admins()->get()->random();
 
-        if(!$tank) {
+        if (!$tank) {
             $tank = Tank::factory()->create();
         }
 
-        if(!$user) {
+        if (!$user) {
             $user = User::factory()->create([
                 'role_id' => Role::ADMIN
             ]);
         }
 
         return [
-            'volume_in_litres' => random_int(10*1000, 100*1000),
+            'volume_in_millilitres' => random_int(10 * 1000, 100 * 1000),
             'tank_id' => $tank->id,
             'user_id' => $user->id
         ];
