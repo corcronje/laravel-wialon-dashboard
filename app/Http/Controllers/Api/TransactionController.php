@@ -68,6 +68,7 @@ class TransactionController extends Controller
             'meta' => [],
             'user_id' => 1,
             'driver_id' => $driver->id,
+            'tank_id' => $pump->tank->id,
             'pump_id' => $pump->id,
             'unit_id' => $unit->id
         ]);
