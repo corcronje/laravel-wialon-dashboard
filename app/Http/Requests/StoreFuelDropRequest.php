@@ -25,6 +25,7 @@ class StoreFuelDropRequest extends FormRequest
         return [
             'tank_id' => ['required', 'integer', 'exists:tanks,id'],
             'volume_in_litres' => ['required', 'integer'],
+            'reason' => ['required', 'string'],
         ];
     }
 }
