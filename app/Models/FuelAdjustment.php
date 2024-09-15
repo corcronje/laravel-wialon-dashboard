@@ -16,5 +16,11 @@ class FuelAdjustment extends Model
         'user_id',
         'tank_id',
         'volume_in_millilitres',
+        'reason',
     ];
+
+    public function getVolumeInLitresAttribute(): float
+    {
+        return $this->volume_in_millilitres / 1000;
+    }
 }
