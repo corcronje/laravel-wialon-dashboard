@@ -33,7 +33,8 @@ class FuelDropFactory extends Factory
         }
 
         return [
-            'volume_in_litres' => random_int(10 * 1000, 100 * 1000),
+            'reason' => $this->faker->sentence,
+            'volume_in_millilitres' => random_int(10 * 1000, 100 * 1000),
             'tank_id' => $tank->id,
             'user_id' => $user->id
         ];
