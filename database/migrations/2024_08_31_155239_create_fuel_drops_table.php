@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Tank::class)->constrained();
-            $table->integer('volume_in_litres');
+            $table->string('reason');
+            $table->integer('volume_in_millilitres');
             $table->softDeletes();
             $table->timestamps();
         });
