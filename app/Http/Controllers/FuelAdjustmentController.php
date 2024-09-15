@@ -41,43 +41,9 @@ class FuelAdjustmentController extends Controller
      */
     public function store(StoreFuelAdjustmentRequest $request)
     {
-        try {
-            // start a database transaction
-            DB::beginTransaction();
+        $request->user()->adjustments()->create($request->validated());
 
-            // create a new fuel adjustment
-            $adjustment = $request->user()->adjustments()->create($request->validated());
-
-            // create a new transaction
-            $request->user()->transactions()->create([
-                'transaction_type_id' => TransactionType::FUEL_ADJUSTMENT,
-                'description' => 'Fuel Adjustment - #' . $adjustment->id,
-                'user_id' => $adjustment->user_id,
-                'volume_in_millilitres' => $adjustment->volume_in_millilitres,
-                'amount_in_cents' => 0,
-                'meta' => [
-                    'adjustment_id' => $adjustment->id,
-                    'tank_id' => $adjustment->tank_id,
-                    'reason' => $adjustment->reason,
-                ],
-            ]);
-
-            // update the tank volume
-            $adjustment->tank->update([
-                'volume_in_millilitres' => $adjustment->tank->volume_in_millilitres + $adjustment->volume_in_millilitres,
-            ]);
-
-            // commit the database transaction
-            DB::commit();
-
-            return redirect()->route('adjustments.index')->with('success', 'Fuel adjustment created successfully');
-        } catch (\Throwable $th) {
-            DB::rollBack();
-
-            dd($th->getMessage());
-
-            return back()->with('error', $th->getMessage());
-        }
+        return redirect()->route('adjustments.index')->with('success', 'Fuel adjustment created successfully');
     }
 
     /**
