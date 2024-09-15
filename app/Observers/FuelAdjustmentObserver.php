@@ -22,6 +22,7 @@ class FuelAdjustmentObserver
                 'adjustment' => $fuelAdjustment,
             ],
             'user_id' => $fuelAdjustment->user_id,
+            'tank_id' => $fuelAdjustment->tank_id,
         ]);
     }
 
