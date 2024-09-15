@@ -7,34 +7,21 @@
 @endsection
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center">
-        <h4>Recent Orders</h4>
-        @can('create', [App\Models\Order::class, new App\Models\Unit(), new App\Models\Driver()])
-            <a href="{{ route('orders.create') }}" class="btn btn-sm btn-primary">New Order</a>
-        @endcan
+    <div class="row">
+        @foreach ($tanks as $tank)
+            <div class="col-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <x-tank.level :tank="$tank" />
+
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ route('tanks.show', $tank) }}" class="btn btn-link w-100">
+                            {{ $tank->name }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
-    @include('orders._datatable', [
-        'config' => [
-            'order' => [0, 'asc'],
-            'searching' => false,
-            'paging' => false,
-            'info' => false,
-            'ordering' => false,
-        ],
-    ])
-    <div class="d-flex justify-content-between align-items-center mt-5">
-        <h4>Recent Trips</h4>
-        @can('create', [App\Models\Trip::class, new App\Models\Unit(), new App\Models\Driver()])
-            <a href="{{ route('trips.create') }}" class="btn btn-sm btn-primary">New Trip</a>
-        @endcan
-    </div>
-    @include('trips._datatable', [
-        'config' => [
-            'order' => [0, 'asc'],
-            'searching' => false,
-            'paging' => false,
-            'info' => false,
-            'ordering' => false,
-        ],
-    ])
 @endsection
