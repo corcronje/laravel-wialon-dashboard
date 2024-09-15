@@ -14,7 +14,7 @@
                 <td>{{ $drop->created_at->toDateTimeString() }}</td>
                 <td>{{ $drop->tank->name }}</td>
                 <td>{{ $drop->user->name }}</td>
-                <td>{{ $drop->volume_in_litres }}</td>
+                <td>{{ number_format($drop->volume_in_litres) }}</td>
                 <td>
                     @can('view', $drop)
                         <a href="{{ route('drops.show', $drop) }}" class="btn btn-sm btn-link">View</a>
