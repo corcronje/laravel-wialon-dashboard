@@ -18,6 +18,7 @@ class Transaction extends Model
         'user_id',
         'driver_id',
         'pump_id',
+        'tank_id',
         'unit_id',
         'transaction_type_id',
         'description',
