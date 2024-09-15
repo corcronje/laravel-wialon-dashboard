@@ -12,7 +12,7 @@
             <tr>
                 <td>{{ $tank->name }}</td>
                 <td>{{ $tank->volume_in_litres }}</td>
-                <td>{{ $tank->current_volume_in_litres }}</td>
+                <td>{{ number_format($tank->current_volume_in_litres, 2) }}</td>
                 <td>
                     @can('view', $tank)
                         <a href="{{ route('tanks.show', $tank) }}" class="btn btn-sm btn-link">View</a>
