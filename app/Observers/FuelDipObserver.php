@@ -13,13 +13,10 @@ class FuelDipObserver
      */
     public function created(FuelDip $fuelDip): void
     {
-        $currentTankVolume = $fuelDip->tank->current_volume_in_millilitres;
-        $variance = $fuelDip->volume_in_millilitres - $currentTankVolume;
-
         Transaction::create([
             'transaction_type_id' => TransactionType::FUEL_DIP,
             'description' => 'Fuel Dip',
-            'volume_in_millilitres' => abs($variance),
+            'volume_in_millilitres' => $fuelDip->volume_in_millilitres - $fuelDip->tank->current_volume_in_millilitres,
             'amount_in_cents' => 0,
             'meta' => [
                 'drop' => $fuelDip,
