@@ -30,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
         Transaction::observe(TransactionObserver::class);
         FuelAdjustment::observe(FuelAdjustmentObserver::class);
         FuelDrop::observe(FuelDropObserver::class);
+        FuelDip::observe(FuelDipObserver::class);
     }
 }
