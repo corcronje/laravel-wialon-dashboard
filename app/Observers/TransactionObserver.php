@@ -12,17 +12,13 @@ class TransactionObserver
      */
     public function created(Transaction $transaction): void
     {
-        // adjust the tank volume
-        if($transaction->transaction_type_id === TransactionType::FUEL_DISPENSED)
-        {
-            $tank = $transaction->pump->tank;
+        $tank = $transaction->tank;
 
-            $currentVolumeInMillilitres = $tank->current_volume_in_millilitres;
+        $currentVolumeInMillilitres = $tank->current_volume_in_millilitres;
 
-            $tank->current_volume_in_millilitres = $currentVolumeInMillilitres - abs($transaction->volume_in_millilitres);
+        $tank->current_volume_in_millilitres = $currentVolumeInMillilitres + $transaction->volume_in_millilitres;
 
-            $tank->save();
-        }
+        $tank->save();
     }
 
     /**
