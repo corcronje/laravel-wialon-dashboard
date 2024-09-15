@@ -40,7 +40,11 @@ class FuelDropController extends Controller
      */
     public function store(StoreFuelDropRequest $request)
     {
-        $request->user()->drops()->create($request->validated());
+        $request->user()->drops()->create([
+            'tank_id' => $request->tank_id,
+            'volume_in_millilitres' => $request->volume_in_litres * 1000,
+            'reason' => $request->reason,
+        ]);
 
         return redirect()->route('drops.index')->with('success', 'Fuel drop created successfully');
     }
