@@ -40,7 +40,10 @@ class FuelDipController extends Controller
      */
     public function store(StoreFuelDipRequest $request)
     {
-        $request->user()->dips()->create($request->validated());
+        $request->user()->dips()->create([
+            'volume_in_millilitres' => $request->volume_in_litres * 1000,
+            'tank_id' => $request->tank_id,
+        ]);
 
         return redirect()->route('dips.index')->with('success', 'Fuel dip created successfully');
     }
