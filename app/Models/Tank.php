@@ -32,6 +32,11 @@ class Tank extends Model
         return $this->current_volume_in_millilitres / 1000;
     }
 
+    public function getCurrentLevelPercentageAttribute(): float
+    {
+        return number_format(($this->current_volume_in_millilitres / $this->volume_in_millilitres) * 100, 2);
+    }
+
     public function pumps(): HasMany
     {
         return $this->hasMany(Pump::class);
