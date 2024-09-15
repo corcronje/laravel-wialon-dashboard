@@ -31,11 +31,9 @@ class PumpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $guid)
+    public function show(Request $request, $pump)
     {
-        dd($guid);
-
-        $pump = Pump::where('guid', $guid)->firstOrFail();
+        $pump = Pump::where('guid', $$request->pump)->firstOrFail();
 
         return PumpResource::make($pump);
     }
