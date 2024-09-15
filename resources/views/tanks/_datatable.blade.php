@@ -11,7 +11,7 @@
         @foreach ($tanks as $tank)
             <tr>
                 <td>{{ $tank->name }}</td>
-                <td>{{ $tank->volume_in_litres }}</td>
+                <td>{{ number_format($tank->volume_in_litres, 2) }}</td>
                 <td>{{ number_format($tank->current_volume_in_litres, 2) }}</td>
                 <td>
                     @can('view', $tank)

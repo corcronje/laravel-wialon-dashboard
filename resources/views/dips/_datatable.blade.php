@@ -14,7 +14,7 @@
                 <td>{{ $dip->created_at->toDateTimeString() }}</td>
                 <td>{{ $dip->tank->name }}</td>
                 <td>{{ $dip->user->name }}</td>
-                <td>{{ $dip->volume_in_litres }}</td>
+                <td>{{ number_format($dip->volume_in_litres, 2) }}</td>
                 <td>
                     @can('view', $dip)
                         <a href="{{ route('dips.show', $dip) }}" class="btn btn-sm btn-link">View</a>

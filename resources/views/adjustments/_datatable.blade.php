@@ -14,7 +14,7 @@
                 <td>{{ $adjustment->created_at->toDateTimeString() }}</td>
                 <td>{{ $adjustment->tank->name }}</td>
                 <td>{{ $adjustment->user->name }}</td>
-                <td>{{ $adjustment->volume_in_litres }}</td>
+                <td>{{ number_format($adjustment->volume_in_litres, 2) }}</td>
                 <td>
                     @can('view', $adjustment)
                         <a href="{{ route('adjustments.show', $adjustment) }}" class="btn btn-sm btn-link">View</a>
