@@ -14,7 +14,7 @@ class PumpController extends Controller
      */
     public function index()
     {
-        return PumpResource::collection(Pump::all());
+        return PumpResource::collection(Pump::with('tank')->get());
     }
 
     /**
@@ -33,7 +33,7 @@ class PumpController extends Controller
      */
     public function show(Request $request, $pump)
     {
-        $pump = Pump::where('guid', $request->pump)->firstOrFail();
+        $pump = Pump::where('guid', $request->pump)->with('tank')->firstOrFail();
 
         return PumpResource::make($pump);
     }
