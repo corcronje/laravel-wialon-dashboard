@@ -88,7 +88,7 @@ class PumpController extends Controller
             'description' => $request->description,
             'cents_per_millilitre' => $request->cents_per_litre * 100,
             'pulses_per_millilitre' => $request->pulses_per_litre * 1000,
-            'status' => 'active',
+            'status' => $request->status ?? 'active',
         ]);
 
         return redirect()->route('pumps.index')->with('success', 'Pump updated successfully.');
