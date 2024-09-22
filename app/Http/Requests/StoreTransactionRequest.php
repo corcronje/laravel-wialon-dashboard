@@ -12,7 +12,7 @@ class StoreTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; // $this->user()->can('create', Transaction::class);
+        return $this->user()->can('create', Transaction::class);
     }
 
     /**
