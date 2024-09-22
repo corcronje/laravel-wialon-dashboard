@@ -75,7 +75,7 @@ class FuelAdjustmentTest extends TestCase
 
         $tank = Tank::factory()->create();
 
-        $tankVolume = $tank->volume_in_millilitres;
+        $currentTankVolumeInMillilitres = $tank->current_volume_in_millilitres;
 
         $adjustmentLitres = rand(-100, 100);
 
@@ -93,6 +93,6 @@ class FuelAdjustmentTest extends TestCase
 
         $tank->refresh();
 
-        $this->assertEquals($tank->volume_in_millilitres, $tankVolume + $adjustmentVolume);
+        $this->assertEquals($tank->current_volume_in_millilitres, $currentTankVolumeInMillilitres + ($adjustmentLitres * 1000));
     }
 }
