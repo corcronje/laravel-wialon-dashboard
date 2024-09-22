@@ -29,7 +29,9 @@ class DriverSeeder extends Seeder
             Driver::updateOrCreate([
                 'employee_number' => $data['employee_number'],
             ],[
-                'name' => Str::title($data['firstname'] . ' ' . Str::title($data['lastname'])),
+                'name' => Str::title($data['firstname']),
+                'lastname' => Str::title(Str::title($data['lastname'])),
+                'said_number' => $data['said_number'] ?? $data['employee_number'], // we may not have the SAID number yet
             ]);
         }
     }
