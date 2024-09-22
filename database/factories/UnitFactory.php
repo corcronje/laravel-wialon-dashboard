@@ -23,10 +23,10 @@ class UnitFactory extends Factory
             'wialon_mileage_sensor_calibration_factor' => 0.01,
             'wialon_fuel_consumption_sensor_id' => 'io201',
             'wialon_fuel_consumption_sensor_calibration_factor' => 0.001,
-            'fuel_consumed_litres' => random_int(100*1000, 1000*1000),
-            'fuel_replenished_litres' => random_int(100*1000, 1000*1000),
-            'mileage_km' => random_int(100*1000, 1000*1000),
-            'mileage_replenished_km' => random_int(100*1000, 1000*1000),
+            'fuel_consumed_litres' => random_int(1000, mt_getrandmax()),
+            'fuel_replenished_litres' => random_int(1000, mt_getrandmax()),
+            'mileage_km' => random_int(1000, mt_getrandmax()),
+            'mileage_replenished_km' => random_int(1000, mt_getrandmax()),
             'reset_at' => null,
             'reset_by' => null
 
