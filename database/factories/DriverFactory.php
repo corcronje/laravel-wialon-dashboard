@@ -26,8 +26,10 @@ class DriverFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
+            'name' => $this->faker->firstName(),
             'employee_number' => $this->faker->randomNumber(6),
+            'lastname' => $this->faker->lastName(),
+            'said_number' => $this->faker->randomNumber(mt_getrandmax()),
         ];
     }
 }

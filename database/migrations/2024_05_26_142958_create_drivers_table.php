@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('employee_number')->unique();
             $table->string('name');
+            $table->string('lastname');
+            $table->string('said_number')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
