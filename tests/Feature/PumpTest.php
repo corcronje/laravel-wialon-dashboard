@@ -39,13 +39,18 @@ class PumpTest extends TestCase
     public function test_an_admin_user_can_create_a_pump(): void {
         $user = $this->newAdminUser();
 
-        $data = Pump::factory()->make();
+        $pump = Pump::factory()->make()->toArray();
 
-        $response = $this->actingAs($user)->post(route('pumps.store'), $data->toArray());
+        $data = $pump;
+
+        $data['cents_per_litre'] = $data['cents_per_millilitre'] / 1000;
+        $data['pulses_per_litre'] = $data['pulses_per_millilitre'] / 1000;
+
+        $response = $this->actingAs($user)->post(route('pumps.store'), $data);
 
         $response->assertRedirect(route('pumps.index'));
 
-        $this->assertDatabaseHas('pumps', $data->toArray());
+        $this->assertDatabaseHas('pumps', $pump);
     }
 
     public function test_a_user_cannot_create_a_pump(): void {
@@ -83,15 +88,18 @@ class PumpTest extends TestCase
     public function test_an_admin_user_can_update_a_pump(): void {
         $user = $this->newAdminUser();
 
-        $pump = Pump::factory()->create();
+        $pump = Pump::factory()->create()->toArray();
 
-        $data = Pump::factory()->make();
+        $data = $pump;
 
-        $response = $this->actingAs($user)->put(route('pumps.update', $pump->id), $data->toArray());
+        $data['cents_per_litre'] = rand(1000, 5000) / 1000;
+        $data['pulses_per_litre'] = rand(1000, 5000) / 1000;
+
+        $response = $this->actingAs($user)->put(route('pumps.update', $pump), $data);
 
         $response->assertRedirect(route('pumps.index'));
 
-        $this->assertDatabaseHas('pumps', $data->toArray());
+        $this->assertDatabaseHas('pumps', $data);
     }
 
     public function test_a_user_cannot_update_a_pump(): void {
