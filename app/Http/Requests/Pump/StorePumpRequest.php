@@ -24,10 +24,11 @@ class StorePumpRequest extends FormRequest
     {
         return [
             'tank_id' => ['required', 'integer', 'exists:tanks,id'],
+            'guid' => ['required', 'string'],
             'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
-            'cents_per_litre' => ['required', 'integer'],
-            'pulses_per_litre' => ['required', 'integer'],
+            'cents_per_litre' => ['required'],
+            'pulses_per_litre' => ['required'],
         ];
     }
 }
