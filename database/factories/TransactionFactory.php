@@ -50,6 +50,7 @@ class TransactionFactory extends Factory
         return [
             'user_id' => $user->id,
             'driver_id' => $driver->id,
+            'tank_id' => $pump->tank->id,
             'pump_id' => $pump->id,
             'unit_id' => $unit->id,
             'transaction_type_id' => $type->id,
