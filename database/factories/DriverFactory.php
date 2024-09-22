@@ -27,9 +27,9 @@ class DriverFactory extends Factory
     {
         return [
             'name' => $this->faker->firstName(),
-            'employee_number' => $this->faker->randomNumber(6),
+            'employee_number' => $this->faker->randomNumber(4),
             'lastname' => $this->faker->lastName(),
-            'said_number' => $this->faker->randomNumber(mt_getrandmax()),
+            'said_number' => $this->faker->randomNumber(4),
         ];
     }
 }
