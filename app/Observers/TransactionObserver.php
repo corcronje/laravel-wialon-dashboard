@@ -16,9 +16,9 @@ class TransactionObserver
 
         $currentVolumeInMillilitres = $tank->current_volume_in_millilitres;
 
-        $tank->current_volume_in_millilitres = $currentVolumeInMillilitres + $transaction->volume_in_millilitres;
-
-        $tank->save();
+        $tank->update([
+            'current_volume_in_millilitres' => $currentVolumeInMillilitres + $transaction->volume_in_millilitres
+        ]);
     }
 
     /**
