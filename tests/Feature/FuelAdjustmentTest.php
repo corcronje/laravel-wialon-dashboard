@@ -77,12 +77,12 @@ class FuelAdjustmentTest extends TestCase
 
         $tankVolume = $tank->volume_in_millilitres;
 
-        $adjustmentVolume = rand(-1000, 1000);
+        $adjustmentLitres = rand(-100, 100);
 
         $response = $this->actingAs($user)->post(route('adjustments.store'), [
             'reason' => 'Fuel adjustment test',
             'tank_id' => $tank->id,
-            'volume_in_millilitres' => $adjustmentVolume
+            'volume_in_litres' => $adjustmentLitres
         ]);
 
         $response->assertStatus(302);
