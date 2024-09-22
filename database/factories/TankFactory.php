@@ -21,7 +21,7 @@ class TankFactory extends Factory
         return [
             'name' => 'Tank ' . $this->faker->unique()->randomNumber(3),
             'volume_in_millilitres' => $volume,
-            'current_volume_in_millilitres' => $volume * 0.75,
+            'current_volume_in_millilitres' => 0,
         ];
     }
 }
