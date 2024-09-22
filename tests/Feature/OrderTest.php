@@ -65,6 +65,8 @@ class OrderTest extends TestCase
     {
         $admin = $this->newAdminUser();
 
+        Order::factory()->create();
+
         $response = $this->actingAs($admin)->getJson(route('orders.show', 1));
 
         $response->assertStatus(200);
