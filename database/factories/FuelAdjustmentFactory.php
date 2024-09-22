@@ -35,7 +35,8 @@ class FuelAdjustmentFactory extends Factory
         return [
             'volume_in_millilitres' => random_int(100 * 1000, 1000 * 1000),
             'tank_id' => $tank->id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'reason' => $this->faker->sentence,
         ];
     }
 }
