@@ -36,7 +36,7 @@ class TankController extends Controller
     {
         Tank::create([
             'name' => $request->name,
-            'volume_in_millilitres' => $request->volume_in_litres * 1000,
+            'volume_in_millilitres' => (int)($request->volume_in_litres * 1000),
             'current_volume_in_millilitres' => 0,
         ]);
 
