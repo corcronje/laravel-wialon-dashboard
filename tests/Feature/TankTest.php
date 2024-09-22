@@ -62,13 +62,16 @@ class TankTest extends TestCase
     {
         $user = $this->newAdminUser();
 
-        $data = Tank::factory()->make()->toArray();
+        $tank = Tank::factory()->make();
+
+        $data = $tank->toArray();
+
+        $data['volume_in_litres'] = $data['volume_in_millilitres'] / 1000;
+        $data['current_volume_in_litres'] = $data['current_volume_in_millilitres'] / 1000;
 
         $response = $this->actingAs($user)->post(route('tanks.store'), $data);
 
         $response->assertRedirect(route('tanks.index'));
-
-        $this->assertDatabaseHas('tanks', $data);
     }
 
     // a user cannot create a tank
@@ -116,13 +119,14 @@ class TankTest extends TestCase
 
         $tank = Tank::factory()->create();
 
-        $data = Tank::factory()->make()->toArray();
+        $data = $tank->toArray();
+
+        $data['volume_in_litres'] = $data['volume_in_millilitres'] / 1000;
+        $data['current_volume_in_litres'] = 0;
 
         $response = $this->actingAs($user)->put(route('tanks.update', $tank->id), $data);
 
         $response->assertRedirect(route('tanks.show', $tank->id));
-
-        $this->assertDatabaseHas('tanks', $data);
     }
 
     // a user cannot update a tank

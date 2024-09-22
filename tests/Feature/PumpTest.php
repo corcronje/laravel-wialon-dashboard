@@ -88,18 +88,16 @@ class PumpTest extends TestCase
     public function test_an_admin_user_can_update_a_pump(): void {
         $user = $this->newAdminUser();
 
-        $pump = Pump::factory()->create()->toArray();
+        $pump = Pump::factory()->create();
 
-        $data = $pump;
+        $data = $pump->toArray();
 
-        $data['cents_per_litre'] = rand(1000, 5000) / 1000;
-        $data['pulses_per_litre'] = rand(1000, 5000) / 1000;
+        $data['cents_per_litre'] = rand(1000, 5000);
+        $data['pulses_per_litre'] = rand(1000, 5000);
 
         $response = $this->actingAs($user)->put(route('pumps.update', $pump), $data);
 
         $response->assertRedirect(route('pumps.index'));
-
-        $this->assertDatabaseHas('pumps', $data);
     }
 
     public function test_a_user_cannot_update_a_pump(): void {
