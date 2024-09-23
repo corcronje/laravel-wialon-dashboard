@@ -20,6 +20,11 @@ class Driver extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function getFullnameAttribute()
+    {
+        return "{$this->name} {$this->lastname}";
+    }
+
     public function getEmployeeNumberAndNameAttribute()
     {
         return "{$this->employee_number} - {$this->name}";

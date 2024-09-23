@@ -3,6 +3,7 @@
         <tr>
             <th>Employee Nr</th>
             <th>Name</th>
+            <th>ID Number</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -10,7 +11,8 @@
         @foreach ($drivers as $driver)
             <tr>
                 <td>{{ $driver->employee_number }}</td>
-                <td>{{ $driver->name }}</td>
+                <td>{{ $driver->fullname }}</td>
+                <td>{{ substr($driver->said_number, 0, 6) }}...</td>
                 <td>
                     @can('view', $driver)
                         <a href="{{ route('drivers.show', $driver) }}" class="btn btn-sm btn-link">View</a>
