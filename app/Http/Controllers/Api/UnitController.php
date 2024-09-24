@@ -12,9 +12,13 @@ class UnitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return UnitResource::collection(Unit::all());
+        $collection = Unit::when($request->has('search'), function ($query) use ($request) {
+            $query->where('wialon_nm', 'like', '%' . $request->search . '%');
+        })->get();
+
+        return UnitResource::collection($collection);
     }
 
     /**
