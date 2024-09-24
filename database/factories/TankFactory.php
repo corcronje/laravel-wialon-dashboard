@@ -16,11 +16,9 @@ class TankFactory extends Factory
      */
     public function definition(): array
     {
-        $volume = $this->faker->randomNumber(5);
-
         return [
             'name' => 'Tank ' . $this->faker->unique()->randomNumber(3),
-            'volume_in_millilitres' => $volume,
+            'volume_in_millilitres' => random_int(2,5) * 10000 * 1000,
             'current_volume_in_millilitres' => 0,
         ];
     }
