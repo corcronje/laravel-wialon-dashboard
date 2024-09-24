@@ -14,7 +14,14 @@ class DriverController extends Controller
      */
     public function index(Request $request)
     {
-        return DriverResource::collection(Driver::all());
+        $collection = Driver::when($request->has('search'), function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('surname', 'like', '%' . $request->search . '%')
+                ->orWhere('employee_number', 'like', '%' . $request->search . '%')
+                ->orWhere('said_number', 'like', '%' . $request->search . '%');
+        })->get();
+
+        return DriverResource::collection($collection);
     }
 
     /**
