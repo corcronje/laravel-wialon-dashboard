@@ -34,7 +34,7 @@ class Tank extends Model
 
     public function getCurrentLevelPercentageAttribute(): float
     {
-        return number_format(($this->current_volume_in_millilitres / $this->volume_in_millilitres) * 100, 2);
+        return ($this->current_volume_in_millilitres / $this->volume_in_millilitres) * 100;
     }
 
     public function pumps(): HasMany
