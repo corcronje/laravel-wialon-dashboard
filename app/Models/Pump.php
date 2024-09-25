@@ -19,6 +19,7 @@ class Pump extends Model
         'cents_per_millilitre',
         'pulses_per_millilitre',
         'status',
+        'open_scan',
     ];
 
     protected $casts = [

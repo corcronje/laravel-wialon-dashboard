@@ -49,6 +49,7 @@ class PumpController extends Controller
             'cents_per_millilitre' => (int)($request->cents_per_litre * 1000),
             'pulses_per_millilitre' => (int)($request->pulses_per_litre * 1000),
             'status' => 'active',
+            'open_scan' => $request->open_scan ?? false,
         ]);
 
         return redirect()->route('pumps.index')->with('success', 'Pump created successfully.');
@@ -89,6 +90,7 @@ class PumpController extends Controller
             'cents_per_millilitre' => $request->cents_per_litre * 100,
             'pulses_per_millilitre' => $request->pulses_per_litre * 1000,
             'status' => $request->status ?? 'active',
+            'open_scan' => $request->open_scan ?? false,
         ]);
 
         return redirect()->route('pumps.index')->with('success', 'Pump updated successfully.');

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('cents_per_millilitre');
             $table->integer('pulses_per_millilitre');
             $table->string('status')->default('active');
+            $table->boolean('open_scan')->default('false');
             $table->string('auth_token')->nullable();
             $table->foreignIdFor(Tank::class)->constrained();
             $table->softDeletes();
