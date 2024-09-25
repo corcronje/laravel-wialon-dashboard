@@ -1,4 +1,5 @@
 <x-select-input name="tank_id" title="Tank" :options="$tanks" :value="old('tanks_id', $pump?->tank_id ?? '')" />
+<x-text-input name="guid" title="GUID" :value="old('guid', $pump?->guid ?? '')" placeholder="GUID" />
 <x-text-input name="name" title="Name" :value="old('name', $pump?->name ?? '')" placeholder="Name" />
 <x-textarea-input name="description" title="Description" :value="old('description', $pump?->description ?? '')" placeholder="Description" />
 <x-text-input name="cents_per_litre" title="Cents Per Litre" :value="old('cents_per_litre', $pump?->cents_per_litre ?? '')" placeholder="Cents Per Litre" />

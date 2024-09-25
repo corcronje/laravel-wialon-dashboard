@@ -23,6 +23,7 @@ class UpdatePumpRequest extends FormRequest
     {
         return [
             'tank_id' => ['required', 'integer', 'exists:tanks,id'],
+            'guid' => ['required', 'string'],
             'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
             'cents_per_litre' => ['required', 'integer'],

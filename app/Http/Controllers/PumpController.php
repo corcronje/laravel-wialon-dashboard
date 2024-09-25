@@ -84,7 +84,7 @@ class PumpController extends Controller
     {
         $pump->update([
             'tank_id' => $request->tank_id,
-            'guid' => Str::uuid(),
+            'guid' => $request->guid,
             'name' => $request->name,
             'description' => $request->description,
             'cents_per_millilitre' => $request->cents_per_litre * 100,
