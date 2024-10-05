@@ -10,6 +10,7 @@
     <form id="edit-unit-form" action="{{ route('units.update', $unit) }}" method="post">
         @csrf
         @method('PUT')
+        <x-text-input name="tag_id" title="Tag Number" :value="old('tag_id', $unit->tag_id ?? '')" placeholder="Tag Number" />
         <x-text-input name="wialon_mileage_sensor_id" title="Mileage Sensor Parameter" :value="old('wialon_mileage_sensor_id', $unit->wialon_mileage_sensor_id ?? '')" placeholder="io_87" />
         <x-text-input name="wialon_mileage_sensor_calibration_factor" title="Mileage Calibration Factor" :value="old(
             'wialon_mileage_sensor_calibration_factor',

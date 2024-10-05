@@ -29,7 +29,8 @@ class Unit extends Model
         'mileage_km',
         'mileage_replenished_km',
         'reset_at',
-        'data'
+        'data',
+        'tag_id'
     ];
 
     protected $casts = [

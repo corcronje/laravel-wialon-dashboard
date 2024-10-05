@@ -15,7 +15,8 @@ class UnitController extends Controller
     public function index(Request $request)
     {
         $collection = Unit::when($request->has('search'), function ($query) use ($request) {
-            $query->where('wialon_nm', 'like', '%' . $request->search . '%');
+            $query->where('wialon_nm', 'like', '%' . $request->search . '%')
+            ->orWhere('tag_id', 'like', '%' . $request->search . '%');
         })->get();
 
         return UnitResource::collection($collection);
