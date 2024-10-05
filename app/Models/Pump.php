@@ -29,7 +29,7 @@ class Pump extends Model
 
     public function getCentsPerLitreAttribute() : float
     {
-        return $this->cents_per_millilitre / 100;
+        return $this->cents_per_millilitre / 1000;
     }
 
     public function getPulsesPerLitreAttribute() : float

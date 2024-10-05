@@ -87,7 +87,7 @@ class PumpController extends Controller
             'guid' => $request->guid,
             'name' => $request->name,
             'description' => $request->description,
-            'cents_per_millilitre' => $request->cents_per_litre * 100,
+            'cents_per_millilitre' => $request->cents_per_litre * 1000,
             'pulses_per_millilitre' => $request->pulses_per_litre * 1000,
             'status' => $request->status ?? 'active',
             'open_scan' => $request->open_scan ?? false,
