@@ -40,6 +40,13 @@ class Unit extends Model
         'data' => 'array'
     ];
 
+    protected $appends = [
+        'fuel_allowed_litres',
+        'distance_travelled_km',
+        'fuel_consumption_litres_per_km',
+        'fuel_consumption_km_per_litre'
+    ];
+
     public function getFuelAllowedLitresAttribute(): int
     {
         return $this->fuel_consumed_litres - $this->fuel_replenished_litres;
