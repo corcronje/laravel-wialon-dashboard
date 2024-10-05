@@ -18,6 +18,7 @@ class DriverController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%')
                 ->orWhere('surname', 'like', '%' . $request->search . '%')
                 ->orWhere('employee_number', 'like', '%' . $request->search . '%')
+                ->orWhere('tag_id', 'like', '%' . $request->search . '%')
                 ->orWhere('said_number', 'like', '%' . $request->search . '%');
         })->get();
 
