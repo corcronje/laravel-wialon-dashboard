@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Driver;
 
 use App\Models\Driver;
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,6 +27,7 @@ class StoreDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tag_id' => ['sometimes', 'string', 'unique:drivers,tag_id,except,id'],
             'employee_number' => ['required', 'string', 'min:3', 'max:10', 'unique:drivers'],
             'name' => ['required', 'string', 'min:3', 'max:50'],
         ];

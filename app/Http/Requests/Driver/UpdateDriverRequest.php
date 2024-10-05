@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Driver;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,6 +26,7 @@ class UpdateDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tag_id' => ['sometimes', 'string', 'unique:drivers,tag_id,' . $this->driver->id],
             'employee_number' => ['required', 'string', 'min:3', 'max:10', 'unique:drivers,employee_number,' . $this->driver->id],
             'name' => ['required', 'string', 'min:3', 'max:50'],
         ];
