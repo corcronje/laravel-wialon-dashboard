@@ -13,7 +13,7 @@ class Driver extends Model
 {
     use HasFactory, SoftDeletes, HasManyOrders, HasManyTrips;
 
-    protected $fillable = ['tab_id', 'employee_number', 'name', 'lastname', 'said_number'];
+    protected $fillable = ['tag_id', 'employee_number', 'name', 'lastname', 'said_number'];
 
     public function orders()
     {
