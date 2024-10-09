@@ -77,6 +77,7 @@
                         <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a></li>
                         <li class="nav-item"><a href="{{ route('trips.index') }}" class="nav-link">Drivers on shift</a></li>
                         <li class="nav-item"><a href="{{ route('orders.index') }}" class="nav-link">Orders</a></li>
+                        <li class="nav-item"><a href="{{ route('attendants.index') }}" class="nav-link">Attendants</a></li>
                         <li class="nav-item"><a href="{{ route('drivers.index') }}" class="nav-link">Drivers</a></li>
                         <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">Users</a></li>
                         <li class="nav-item"><a href="{{ route('units.index') }}" class="nav-link">Units</a></li>

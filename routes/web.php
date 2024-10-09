@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AttendantController;
 use App\Http\Controllers\CloseTripController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
@@ -30,6 +30,7 @@ Route::middleware([
     Route::put('units/{unit}/reset', ResetUnitController::class)->name('units.reset');
     Route::resource('tanks', TankController::class);
     Route::resource('drivers', DriverController::class);
+    Route::resource('attendants', AttendantController::class);
     Route::resource('users', UserController::class);
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);
     Route::resource('orders', OrderController::class);
